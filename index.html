@@ -1,0 +1,1609 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="html">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>قاموس مونتاج — 500+ مصطلح</title>
+  <!-- Google Fonts: Cairo -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <style id="theme-style">
+    :root {
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #2d3748;
+      --text-light: #4a5568;
+      --primary: #3182ce;
+      --primary-light: #63b3ed;
+      --primary-dark: #2c5282;
+      --success: #38a169;
+      --danger: #e53e3e;
+      --border: #e2e8f0;
+      --shadow: rgba(0,0,0,0.08);
+      --sidebar-bg: #edf2f7;
+      --sidebar-hover: #e2e8f0;
+      --quiz-bg: #ebf8ff;
+      --option-bg: #f7fafc;
+      --option-hover: #ebf4ff;
+    }
+    .dark {
+      --bg: #1a202c;
+      --card-bg: #2d3748;
+      --text: #e2e8f0;
+      --text-light: #a0aec0;
+      --primary: #63b3ed;
+      --primary-light: #90cdfa;
+      --primary-dark: #4299e1;
+      --success: #68d391;
+      --danger: #fc8181;
+      --border: #4a5568;
+      --shadow: rgba(0,0,0,0.3);
+      --sidebar-bg: #2d3748;
+      --sidebar-hover: #4a5568;
+      --quiz-bg: #2c5282;
+      --option-bg: #2b6cb0;
+      --option-hover: #2a5c9e;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Cairo', Tahoma, sans-serif;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.3s, color 0.3s;
+      display: flex;
+      padding: 0;
+      overflow-x: hidden;
+    }
+    /* القائمة الجانبية */
+    #sidebar {
+      width: 240px;
+      background: var(--sidebar-bg);
+      height: 100vh;
+      padding: 20px 0;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+      position: fixed;
+      top: 0;
+      right: 0;
+      z-index: 100;
+      overflow-y: auto;
+      transform: translateX(0);
+      transition: transform 0.3s ease;
+    }
+    #sidebar.mobile-hidden {
+      transform: translateX(100%);
+    }
+    .logo {
+      text-align: center;
+      padding: 0 20px 20px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 20px;
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--primary);
+    }
+    /* أنماط الأيقونات المحسّنة */
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 20px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.25s ease;
+      position: relative;
+      border-radius: 0 0 0 12px;
+      margin: 0 10px 8px;
+    }
+    .icon-box {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      background: linear-gradient(180deg, rgba(49, 130, 206, 0.18), rgba(49, 130, 206, 0.08));
+      box-shadow: 0 4px 8px rgba(16,24,40,0.06);
+      transition: all 0.22s ease;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    /* تأثير اللمعان (Shimmer) */
+    .icon-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: -150%;
+      bottom: 0;
+      width: 150%;
+      background: linear-gradient(to left, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.4) 30%, 
+        rgba(255, 255, 255, 0.7) 50%, 
+        rgba(255, 255, 255, 0.4) 70%, 
+        transparent 100%
+      );
+      opacity: 0;
+      z-index: 1;
+    }
+    .nav-item:hover .icon-box::before {
+      opacity: 1;
+      animation: shimmerRTL 1.2s infinite;
+    }
+    @keyframes shimmerRTL {
+      0% { right: -150%; }
+      100% { right: 150%; }
+    }
+    .icon-blue {
+      color: var(--primary);
+      stroke-width: 1.8;
+      width: 24px;
+      height: 24px;
+      display: block;
+      z-index: 2;
+    }
+    .nav-item:hover,
+    .nav-item.active {
+      background: var(--sidebar-hover);
+      color: var(--primary);
+      transform: translateX(-4px);
+    }
+    .nav-item:hover .icon-box,
+    .nav-item.active .icon-box {
+      transform: translateY(-4px) scale(1.06);
+      filter: saturate(1.1);
+      box-shadow: 0 8px 16px rgba(16,24,40,0.12);
+      background: linear-gradient(180deg, rgba(49, 130, 206, 0.3), rgba(49, 130, 206, 0.15));
+    }
+    /* تأثير العائم (Floaty) */
+    @keyframes floaty {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
+      100% { transform: translateY(0); }
+    }
+    .floaty { animation: floaty 4s ease-in-out infinite; }
+    .floaty-delay-1 { animation-delay: 0.2s; }
+    .floaty-delay-2 { animation-delay: 0.4s; }
+    .floaty-delay-3 { animation-delay: 0.6s; }
+    .floaty-delay-4 { animation-delay: 0.8s; }
+    .floaty-delay-5 { animation-delay: 1.0s; }
+    /* تأثير النبض للزر النشط */
+    .nav-item.active .icon-box::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 12px;
+      border: 2px solid var(--primary);
+      animation: pulse 2s infinite;
+      z-index: 0;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.05); opacity: 0.7; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    /* المحتوى الرئيسي */
+    #main-content {
+      flex: 1;
+      margin-right: 240px;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      margin: 20px 0;
+      font-size: 28px;
+      color: var(--primary);
+    }
+    .welcome {
+      text-align: center;
+      margin-bottom: 20px;
+      color: var(--text-light);
+      font-size: 16px;
+    }
+    .search-box {
+      display: flex;
+      gap: 10px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+    #search {
+      flex: 1;
+      min-width: 200px;
+      padding: 14px;
+      font-size: 16px;
+      border: 2px solid var(--primary);
+      border-radius: 8px;
+      background: var(--card-bg);
+      color: var(--text);
+      text-align: right;
+      direction: rtl;
+    }
+    #search::placeholder {
+      color: var(--text-light);
+    }
+    .btn {
+      padding: 14px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    #search-btn {
+      background: var(--primary);
+      color: white;
+    }
+    #search-btn:hover {
+      background: #2a6bb5;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+    #results, #quiz-container {
+      margin-top: 20px;
+    }
+    .term {
+      background: var(--card-bg);
+      margin: 16px 0;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px var(--shadow);
+      border-right: 4px solid var(--primary);
+    }
+    .en {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 20px;
+      margin-bottom: 6px;
+    }
+    .ar {
+      font-weight: 700;
+      color: var(--danger);
+      font-size: 20px;
+      direction: rtl;
+      margin-bottom: 8px;
+    }
+    .desc {
+      color: var(--text-light);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+
+    /* لافتة الاختبار الخارجي */
+    #external-quiz-banner {
+      margin-top: 30px;
+      padding: 20px;
+      background: var(--quiz-bg);
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 4px 12px var(--shadow);
+      display: none;
+    }
+
+
+    /* نافذة الاختبار */
+    #quiz-container {
+      background: var(--quiz-bg);
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px var(--shadow);
+    }
+    .quiz-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .quiz-progress {
+      font-size: 16px;
+      color: var(--text);
+    }
+    .quiz-timer {
+      font-size: 20px;
+      color: var(--danger);
+      font-weight: bold;
+    }
+    .quiz-question {
+      font-size: 22px;
+      margin-bottom: 25px;
+      line-height: 1.5;
+      text-align: center;
+      color: var(--primary);
+      padding: 15px;
+      background: var(--card-bg);
+      border-radius: 10px;
+      border: 2px solid var(--primary-light);
+    }
+    .options {
+      display: grid;
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+    .option {
+      padding: 18px;
+      background: var(--option-bg);
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: 600;
+      transition: all 0.25s;
+      text-align: center;
+      border: 1px solid var(--border);
+    }
+    .option:hover {
+      background: var(--option-hover);
+      color: white;
+      transform: scale(1.02);
+      border-color: var(--primary);
+    }
+    .option.correct {
+      background: var(--success) !important;
+      color: white !important;
+      animation: correctPulse 0.6s;
+    }
+    .option.incorrect {
+      background: var(--danger) !important;
+      color: white !important;
+      animation: incorrectShake 0.6s;
+    }
+    @keyframes correctPulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    @keyframes incorrectShake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+    .quiz-controls {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    #next-quiz {
+      background: var(--primary);
+      color: white;
+    }
+    #next-quiz:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(49, 130, 206, 0.4);
+    }
+    #exit-quiz {
+      background: var(--danger);
+      color: white;
+    }
+    #exit-quiz:hover {
+      background: #c53030;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(229, 62, 62, 0.4);
+    }
+    /* نافذة الإعدادات */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      z-index: 2000;
+    }
+    .modal.show {
+      display: block;
+    }
+    .modal-content {
+      background: var(--card-bg);
+      margin: 8% auto;
+      padding: 30px;
+      width: 90%;
+      max-width: 500px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      color: var(--text);
+      position: relative;
+      transform: scale(0.7);
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+    .modal.show .modal-content {
+      transform: scale(1);
+      opacity: 1;
+    }
+    .modal h2 {
+      margin-bottom: 25px;
+      text-align: center;
+      color: var(--primary);
+    }
+    .close {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      font-size: 28px;
+      font-weight: bold;
+      color: var(--text-light);
+      cursor: pointer;
+    }
+    .close:hover {
+      color: var(--danger);
+    }
+    .setting {
+      margin: 20px 0;
+    }
+    .setting label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: 600;
+      font-size: 17px;
+    }
+    .setting input {
+      transform: scale(1.3);
+    }
+
+
+    /* زر القائمة على الجوال */
+    #menu-toggle {
+      display: none;
+    }
+
+
+    /* الجوال: تحسين كامل */
+    @media (max-width: 768px) {
+      #sidebar {
+        width: 280px;
+        height: 100vh;
+        right: 0;
+        top: 0;
+        z-index: 2000;
+        box-shadow: -4px 0 12px rgba(0,0,0,0.2);
+      }
+      #sidebar.mobile-hidden {
+        transform: translateX(100%);
+      }
+      #menu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 8px 14px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        gap: 8px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+      #menu-toggle:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      }
+      #main-content {
+        margin-right: 0;
+        padding: 15px;
+      }
+      h1 {
+        font-size: 24px;
+      }
+      .search-box {
+        flex-direction: column;
+      }
+      .btn {
+        width: 100%;
+        padding: 16px;
+        font-size: 17px;
+      }
+      .term {
+        padding: 16px;
+      }
+      .en, .ar {
+        font-size: 18px;
+      }
+      .desc {
+        font-size: 15px;
+      }
+      .welcome {
+        font-size: 15px;
+      }
+      #external-quiz-banner {
+        padding: 16px;
+      }
+      #external-quiz-banner .btn {
+        width: 100%;
+        padding: 14px;
+        font-size: 17px;
+      }
+    }
+    @media (max-width: 480px) {
+      #sidebar {
+        width: 280px;
+      }
+    }
+    /* reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .floaty, .nav-item:hover .icon-box::before {
+        animation: none !important;
+      }
+      .nav-item, .icon-box {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- القائمة الجانبية -->
+  <aside id="sidebar" class="mobile-hidden">
+    <div class="logo">قاموس المونتاج</div>
+    <a href="#" class="nav-item active floaty floaty-delay-1" data-section="dictionary">
+      <div class="icon-box" aria-hidden="true">
+        <i data-lucide="book-open" class="icon-blue"></i>
+      </div>
+      <span>القاموس</span>
+    </a>
+    <a href="#" class="nav-item floaty floaty-delay-2" data-section="quiz">
+      <div class="icon-box" aria-hidden="true">
+        <i data-lucide="help-circle" class="icon-blue"></i>
+      </div>
+      <span>اختبار تفاعلي</span>
+    </a>
+    <a href="#" class="nav-item floaty floaty-delay-3" data-section="settings">
+      <div class="icon-box" aria-hidden="true">
+        <i data-lucide="settings" class="icon-blue"></i>
+      </div>
+      <span>الإعدادات</span>
+    </a>
+    <a href="#" class="nav-item floaty floaty-delay-4" data-section="about">
+      <div class="icon-box" aria-hidden="true">
+        <i data-lucide="info" class="icon-blue"></i>
+      </div>
+      <span>حول</span>
+    </a>
+    <a href="#" class="nav-item floaty floaty-delay-5" data-section="external-quiz">
+      <div class="icon-box" aria-hidden="true">
+        <i data-lucide="sparkle" class="icon-blue"></i>
+      </div>
+      <span>اختبر نفسك الآن</span>
+    </a>
+  </aside>
+  <!-- المحتوى الرئيسي -->
+  <main id="main-content">
+    <!-- زر القائمة في الأعلى، يمين الصفحة -->
+    <div style="display:flex; justify-content: flex-end; margin-bottom: 15px;">
+      <button id="menu-toggle">☰ القائمة</button>
+    </div>
+    <h1>قاموس مونتاج احترافي</h1>
+    <p class="welcome">ابحث عن 500+ مصطلح مونتاج بالعربية والإنجليزية مع شرح مبسط</p>
+    <div class="search-box">
+      <input type="text" id="search" placeholder="ابحث عن مصطلح (مثل: Timeline, Keyframe, B-Roll...)">
+      <button id="search-btn" class="btn">بحث</button>
+    </div>
+    <div id="results"></div>
+    <div id="quiz-container" style="display:none;"></div>
+
+
+    <!-- لافتة ترويجية ثابتة -->
+    <div id="external-quiz-banner">
+      <p style="font-size: 18px; font-weight: 600; color: var(--primary); margin-bottom: 12px;">
+        🌟 هل تحب هذا القاموس؟ جرّب اختبارًا تفاعليًا خارجيًا لمصطلحات المونتاج!
+      </p>
+      <a href="https://68d71e990ddc280008721a6b--capable-starship-a9e926.netlify.app/" 
+         target="_blank" 
+         class="btn" 
+         style="background: var(--success); color: white; text-decoration: none; display: inline-block;">
+        اختبر نفسك الآن
+      </a>
+    </div>
+  </main>
+  <!-- نوافذ الإعدادات وحول -->
+  <div id="settings-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>الإعدادات</h2>
+      <div class="setting">
+        <label>الوضع الليلي</label>
+        <input type="checkbox" id="dark-mode">
+      </div>
+      <div class="setting">
+        <label>عرض مؤقت في الاختبار (مقترح)</label>
+        <input type="checkbox" id="timer-mode" checked>
+      </div>
+      <div class="setting">
+        <label>إظهار المصطلحات النادرة</label>
+        <input type="checkbox" id="show-rare" checked>
+      </div>
+    </div>
+  </div>
+  <div id="about-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>حول هذا القاموس</h2>
+      <p style="line-height:1.8;color:var(--text-light);">
+        هذا القاموس يحتوي على أكثر من 500 مصطلح احترافي في مجال المونتاج والفيديو، 
+        تم جمعها من برامج مثل Adobe Premiere Pro، DaVinci Resolve، Final Cut Pro، 
+        وكتب تعليمية معتمدة. الهدف هو تسهيل تعلم المصطلحات الفنية للمبتدئين والمحترفين.
+      </p>
+      <p style="margin-top:15px;font-weight:600;color:var(--primary);">
+        ✨ مثالي للمحررين، صانعي المحتوى، وطلاب السينما!
+      </p>
+    </div>
+  </div>
+  <!-- نافذة الاختبار الخارجي -->
+  <div id="external-quiz-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>هل ترغب في الدخول لاختبار مصطلحات المونتاج؟</h2>
+      <p style="text-align:center; margin:20px 0; line-height:1.7; color:var(--text-light);">
+        جرّب اختبارًا تفاعليًا خارجيًا يحتوي على أسئلة متنوعة لتقييم معرفتك!
+      </p>
+      <div style="display:flex; justify-content:center; gap:15px; flex-wrap:wrap;">
+        <a href="https://68d71e990ddc280008721a6b--capable-starship-a9e926.netlify.app/" target="_blank" class="btn" style="background:var(--success); color:white; padding:12px 24px; text-decoration:none;">
+          نعم، انتقل الآن
+        </a>
+        <button id="cancel-external-quiz" class="btn" style="background:var(--danger); color:white; padding:12px 24px;">
+          إلغاء
+        </button>
+      </div>
+    </div>
+  </div>
+  <script>
+    const dict = [
+      {en:"Timeline",ar:"الخط الزمني",desc:"منطقة ترتيب المقاطع والصوت والتأثيرات."},
+      {en:"Render",ar:"تصيير",desc:"معالجة الفيديو لإنشاء معاينة أو تصدير نهائي."},
+      {en:"Keyframe",ar:"إطار مفتاحي",desc:"نقطة تحكم لتغيير خصائص التأثير مع الوقت."},
+      {en:"B-Roll",ar:"بي-رول",desc:"لقطات داعمة تُستخدم لتغطية الحوار أو السرد."},
+      {en:"LUT",ar:"جدول البحث اللوني",desc:" preset لتصحيح/تصنيف الألوان."},
+      {en:"Proxy",ar:"وسيط",desc:"نسخة منخفضة الجودة لتسريع المونتاج."},
+      {en:"Warp Stabilizer",ar:"مثبت الالتواء",desc:"أداة متقدمة لتثبيت الفيديو في أدوبي."},
+      {en:"Cut",ar:"قطع",desc:"انتقال فوري بين لقطتين دون تأثير."},
+      {en:"Fade In",ar:"ظهور تدريجي",desc:"تبدأ اللقطة من السواد وتظهر تدريجيًا."},
+      {en:"Fade Out",ar:"اختفاء تدريجي",desc:"تختفي اللقطة تدريجيًا حتى تصبح سوداء."},
+      {en:"Dissolve",ar:"ذوبان",desc:"لقطة تذوب في الأخرى بسلاسة."},
+      {en:"Wipe",ar:"مسح",desc:"انتقال عبر حركة خط أو شكل يمسح اللقطة."},
+      {en:"J-Cut",ar:"جيه-كيت",desc:"الصوت من المشهد التالي يبدأ قبل الصورة."},
+      {en:"L-Cut",ar:"إل-كيت",desc:"الصوت من المشهد الحالي يستمر بعد تغيير الصورة."},
+      {en:"Clip",ar:"مقطع",desc:"وحدة فيديو أو صوت داخل المشروع."},
+      {en:"Sequence",ar:"تسلسل",desc:"مجموعة من المقاطع المرتبة زمنيًا."},
+      {en:"Color Grading",ar:"تصنيف الألوان",desc:"تعديل الألوان لإعطاء طابع بصري دراماتيكي."},
+      {en:"Color Correction",ar:"معادلة الألوان",desc:"تصحيح الألوان لجعل المشهد طبيعيًا."},
+      {en:"Chroma Key",ar:"المفتاح اللوني",desc:"إزالة خلفية بلون محدد (مثل الأخضر)."},
+      {en:"Green Screen",ar:"الشاشة الخضراء",desc:"خلفية خضراء تُستخدم للمونتاج."},
+      {en:"Opacity",ar:"العتامة",desc:"درجة شفافية العنصر."},
+      {en:"Aspect Ratio",ar:"نسبة العرض إلى الارتفاع",desc:"مثل 16:9 أو 4:3."},
+      {en:"Resolution",ar:"الدقة",desc:"عدد البكسلات في الصورة (مثل 1920x1080)."},
+      {en:"Frame Rate",ar:"معدل الإطارات",desc:"عدد الإطارات في الثانية (مثل 24fps)."},
+      {en:"Playback",ar:"التشغيل",desc:"عرض الفيديو في نافذة المعاينة."},
+      {en:"Scrubbing",ar:"التمرير اليدوي",desc:"سحب مؤشر الوقت لعرض الإطارات يدويًا."},
+      {en:"Trim",ar:"تقليم",desc:"قص أطراف المقطع لضبط طوله."},
+      {en:"Ripple Edit",ar:"تعديل تموجي",desc:"قص أو تمديد مقطع مع تحريك المقاطع التي تليه."},
+      {en:"Rolling Edit",ar:"تعديل دحرجي",desc:"تغيير نقطة الالتقاء بين مقطعين دون تغيير الطول الكلي."},
+      {en:"Slip Tool",ar:"أداة الانزلاق",desc:"تغيير محتوى المقطع دون تغيير موضعه."},
+      {en:"Slide Tool",ar:"أداة التمرير",desc:"تحريك مقطع بين مقطعين مع الحفاظ على الطول."},
+      {en:"Nesting",ar:"التداخل",desc:"تحويل مقطع إلى تسلسل فرعي."},
+      {en:"Audio Ducking",ar:"خفض الصوت التلقائي",desc:"خفض صوت الخلفية عند ظهور الحوار."},
+      {en:"Voiceover",ar:"التعليق الصوتي",desc:"صوت يُضاف فوق الفيديو دون ظهور المتحدث."},
+      {en:"ADR",ar:"استبدال الحوار",desc:"إعادة تسجيل الحوار في الاستوديو."},
+      {en:"Waveform",ar:"موجة الصوت",desc:"تمثيل مرئي لشدة الصوت."},
+      {en:"Spectrum",ar:"الطيف الترددي",desc:"عرض الترددات الصوتية."},
+      {en:"Export",ar:"تصدير",desc:"حفظ المشروع كفيديو نهائي."},
+      {en:"Import",ar:"استيراد",desc:"إدخال ملفات وسائط إلى المشروع."},
+      {en:"Bin",ar:"سلة",desc:"مجلد لتنظيم المقاطع داخل المشروع."},
+      {en:"Marker",ar:"علامة",desc:"إشارة زمنية على الخط الزمني للملاحظات."},
+      {en:"Multicam",ar:"تعدد الكاميرات",desc:"مونتاج لقطات من كاميرات متعددة في آن واحد."},
+      {en:"Speed Ramp",ar:"تسارع السرعة",desc:"تغيير سرعة الفيديو بشكل دراماتيكي."},
+      {en:"Slow Motion",ar:"الحركة البطيئة",desc:"عرض الفيديو بأبطأ من سرعته الأصلية."},
+      {en:"Time Remapping",ar:"إعادة تعيين الوقت",desc:"التحكم الديناميكي في سرعة الفيديو."},
+      {en:"Stabilization",ar:"تثبيت الصورة",desc:"تصحيح الاهتزاز في اللقطات."},
+      {en:"Tracking",ar:"التتبع",desc:"ربط تأثير أو نص بحركة كائن في الفيديو."},
+      {en:"Masking",ar:"القناع",desc:"عزل جزء من الصورة للتأثير عليه."},
+      {en:"Matte",ar:"المات",desc:"قناع لتحديد مناطق الشفافية."},
+      {en:"Alpha Channel",ar:"قناة ألفا",desc:"تحدد شفافية كل بكسل في الصورة."},
+      {en:"Bitrate",ar:"معدل البت",desc:"كمية البيانات في الثانية للفيديو أو الصوت."},
+      {en:"Codec",ar:"المرمز",desc:"خوارزمية ضغط/فك ضغط الفيديو."},
+      {en:"Container",ar:"الحاوية",desc:"صيغة الملف مثل MP4 أو MOV."},
+      {en:"Interlaced",ar:"مضفّر",desc:"طريقة عرض قديمة للإطارات (مجالس متشابكة)."},
+      {en:"Progressive",ar:"متتابع",desc:"كل إطار يُعرض كاملاً (جودة أعلى)."},
+      {en:"Field Order",ar:"ترتيب المجال",desc:"للفيديو المضفر: علوي أول أو سفلي أول."},
+      {en:"Safe Margin",ar:"الهامش الآمن",desc:"منطقة لتجنب قص العناصر على الشاشات القديمة."},
+      {en:"Title Safe",ar:"هامش العناوين",desc:"منطقة آمنة لوضع النصوص."},
+      {en:"Action Safe",ar:"هامش الحركة",desc:"منطقة آمنة لعرض الحركة الكاملة."},
+      {en:"Zoom",ar:"تكبير",desc:"تقريب جزء من الصورة."},
+      {en:"Pan",ar:"المقلاة",desc:"تحريك الكاميرا أفقيًا."},
+      {en:"Tilt",ar:"الميل",desc:"تحريك الكاميرا عموديًا."},
+      {en:"Dolly",ar:"العربة",desc:"تحريك الكاميرا للأمام أو الخلف على سكة."},
+      {en:"Crane Shot",ar:"لقطة الرافعة",desc:"لقطة من كاميرا على ذراع متحرك."},
+      {en:"Handheld",ar:"محمول باليد",desc:"لقطة مصورة باليد (اهتزاز طبيعي)."},
+      {en:"Steadicam",ar:"ستيدي كام",desc:"جهاز لتثبيت الكاميرا أثناء الحركة."},
+      {en:"Over the Shoulder",ar:"من فوق الكتف",desc:"لقطة من خلف شخص ينظر لشخص آخر."},
+      {en:"Close-up",ar:"لقطة قريبة",desc:"تركيز على الوجه أو جزء صغير."},
+      {en:"Extreme Close-up",ar:"لقطة قريبة جدًا",desc:"تفاصيل دقيقة (مثل العين)."},
+      {en:"Medium Shot",ar:"لقطة متوسطة",desc:"من الخصر إلى الرأس."},
+      {en:"Wide Shot",ar:"لقطة واسعة",desc:"عرض كامل للمشهد والشخص."},
+      {en:"Establishing Shot",ar:"لقطة تمهيدية",desc:"لقطة تُظهر المكان أو السياق."},
+      {en:"Cutaway",ar:"لقطة انفصال",desc:"لقطة جانبية تُستخدم لملء الفراغات."},
+      {en:"Match Cut",ar:"قطع متناسق",desc:"انتقال بين لقطتين متشابهتين في الشكل أو الحركة."},
+      {en:"Jump Cut",ar:"قطع قافز",desc:"انتقال مفاجئ يخلق شعورًا بالانقطاع."},
+      {en:"Crossfade",ar:"تلاشي متقاطع",desc:"تلاشي صوتي بين مقطعين."},
+      {en:"Audio Sync",ar:"مزامنة الصوت",desc:"توحيد توقيت الصوت مع الفيديو."},
+      {en:"Clapboard",ar:"لوحة التصوير",desc:"أداة لمزامنة الصوت والصورة في التصوير."},
+      {en:"Timecode",ar:"الكود الزمني",desc:"توقيت دقيق لكل إطار (مثل 01:23:45:12)."},
+      {en:"Drop Frame",ar:"إطار مهمل",desc:"نظام وقت يعوّض اختلاف 29.97fps."},
+      {en:"Non-Drop Frame",ar:"إطار غير مهمل",desc:"عدّ كل إطار دون تخطي."},
+      {en:"Offline Editing",ar:"مونتاج غير متصل",desc:"استخدام نسخ منخفضة الجودة للتحرير."},
+      {en:"Online Editing",ar:"مونتاج متصل",desc:"المرحلة النهائية باستخدام الملفات الأصلية."},
+      {en:"Master",ar:"الماستر",desc:"النسخة النهائية الجاهزة للتوزيع."},
+      {en:"Proxy Workflow",ar:"سير عمل الوسيط",desc:"استخدام ملفات خفيفة أثناء المونتاج."},
+      {en:"Transcode",ar:"إعادة الترميز",desc:"تحويل الفيديو من صيغة إلى أخرى."},
+      {en:"In Point",ar:"نقطة البداية",desc:"المكان الذي يبدأ عنده المقطع في التسلسل."},
+      {en:"Out Point",ar:"نقطة النهاية",desc:"المكان الذي ينتهي عنده المقطع."},
+      {en:"Source Monitor",ar:"شاشة المصدر",desc:"عرض المقطع قبل إدراجه في التسلسل."},
+      {en:"Program Monitor",ar:"شاشة البرنامج",desc:"عرض التسلسل النهائي."},
+      {en:"Split Edit",ar:"تعديل منفصل",desc:"تحرير الصوت والفيديو بشكل منفصل."},
+      {en:"Audio Channel",ar:"قناة صوت",desc:"مصدر صوتي منفصل (يسار، يمين، ستيريو...)."},
+      {en:"Mono",ar:"أحادي",desc:"صوت عبر قناة واحدة."},
+      {en:"Stereo",ar:"ستيريو",desc:"صوت عبر قناتين (يسار ويمين)."},
+      {en:"5.1 Surround",ar:"صوت محيطي 5.1",desc:"نظام صوتي متعدد القنوات."},
+      {en:"Peak",ar:"الذروة",desc:"أعلى مستوى صوتي في المقطع."},
+      {en:"Noise Reduction",ar:"خفض الضوضاء",desc:"إزالة الأصوات غير المرغوب فيها."},
+      {en:"Equalizer",ar:"المعادل",desc:"ضبط الترددات الصوتية."},
+      {en:"Compression",ar:"الضغط الصوتي",desc:"تقليل الفروق بين الأصوات العالية والمنخفضة."},
+      {en:"Limiter",ar:"الحدّاد",desc:"يمنع الصوت من تجاوز مستوى معين."},
+      {en:"Gain",ar:"التكبير",desc:"رفع أو خفض مستوى الصوت العام."},
+      {en:"Pan Pot",ar:"موازنة الصوت",desc:"توزيع الصوت بين اليسار واليمين."},
+      {en:"VU Meter",ar:"مقياس الصوت",desc:"مؤشر لمستوى الصوت."},
+      {en:"Scopes",ar:"المنظار",desc:"أدوات تحليل الفيديو (موجات، متجهات...)."},
+      {en:"Vectorscope",ar:"منظار المتجهات",desc:"تحليل ألوان الفيديو."},
+      {en:"Histogram",ar:"المدرج التكراري",desc:"عرض توزيع الإضاءة في الصورة."},
+      {en:"Parade",ar:"العرض الجانبي",desc:"عرض قنوات الألوان (R, G, B) بشكل منفصل."},
+      {en:"Lift",ar:"رفع",desc:"إزالة مقطع مع الحفاظ على الفراغ."},
+      {en:"Extract",ar:"استخراج",desc:"إزالة مقطع وإغلاق الفراغ تلقائيًا."},
+      {en:"Insert Edit",ar:"إدراج",desc:"إدخال مقطع ودفع المقاطع التالية."},
+      {en:"Overwrite Edit",ar:"استبدال",desc:"استبدال جزء من التسلسل دون تغيير الطول."},
+      {en:"Three-Point Edit",ar:"تحرير ثلاث نقاط",desc:"طريقة دقيقة لوضع المقطع في التسلسل."},
+      {en:"Handles",ar:"المقابض",desc:"الإطارات الزائدة قبل وبعد المقطع لسهولة التعديل."},
+      {en:"Render Queue",ar:"صف التصيير",desc:"قائمة بالمقاطع الجاهزة للتصدير."},
+      {en:"Batch Export",ar:"تصدير دفعة",desc:"تصدير عدة مقاطع دفعة واحدة."},
+      {en:"Metadata",ar:"البيانات الوصفية",desc:"معلومات عن الملف (التاريخ، الكاميرا، الإعدادات...)."},
+      {en:"Proxy Media",ar:"وسائط وسيطة",desc:"ملفات منخفضة الجودة للمونتاج السريع."},
+      {en:"Smart Render",ar:"تصيير ذكي",desc:"يُصيّر فقط الأجزاء المعدّلة."},
+      {en:"GPU Acceleration",ar:"تسريع وحدة معالجة الرسومات",desc:"استخدام كرت الشاشة لتسريع الأداء."},
+      {en:"RAM Preview",ar:"معاينة الذاكرة",desc:"تشغيل سلس باستخدام ذاكرة الوصول العشوائي."},
+      {en:"Scratch Disk",ar:"قرص التخزين المؤقت",desc:"المكان الذي يُخزن فيه المونتاج الملفات المؤقتة."},
+      {en:"Project File",ar:"ملف المشروع",desc:"ملف يحتوي على إعدادات المشروع دون الوسائط."},
+      {en:"Relink",ar:"إعادة ربط",desc:"ربط الملفات المفقودة بمساراتها الجديدة."},
+      {en:"Consolidate",ar:"تجميع",desc:"جمع جميع الملفات المستخدمة في مجلد واحد."},
+      {en:"Archive",ar:"أرشفة",desc:"حفظ المشروع مع جميع الملفات للاحتفاظ به."},
+      {en:"Undo",ar:"تراجع",desc:"إلغاء آخر إجراء."},
+      {en:"Redo",ar:"إعادة",desc:"استعادة الإجراء الذي تم التراجع عنه."},
+      {en:"Shortcut",ar:"اختصار لوحة المفاتيح",desc:"أمر سريع عبر مفاتيح معينة."},
+      {en:"Workspace",ar:"مساحة العمل",desc:"ترتيب النوافذ والأدوات حسب المهمة."},
+      {en:"Effect",ar:"تأثير",desc:"تعديل بصري أو صوتي يُضاف للمقطع."},
+      {en:"Transition",ar:"انتقال",desc:"تأثير بين مقطعين."},
+      {en:"Plugin",ar:"إضافة",desc:"أداة خارجية لتوسيع ميزات البرنامج."},
+      {en:"Presets",ar:"إعدادات مسبقة",desc:"تأثيرات أو إعدادات جاهزة للاستخدام."},
+      {en:"Motion Graphics",ar:"الرسوم المتحركة",desc:"عناصر رسومية متحركة (نصوص، أشكال...)."},
+      {en:"Lower Third",ar:"النص السفلي",desc:"نص يظهر في الثلث السفلي من الشاشة."},
+      {en:"Bug",ar:"الشعار الصغير",desc:"رمز القناة أو الشعار في زاوية الشاشة."},
+      {en:"Watermark",ar:"العلامة المائية",desc:"نص أو شعار شبه شفاف على الفيديو."},
+      {en:"Render In",ar:"نقطة بدء التصيير",desc:"الوقت الذي يبدأ عنده التصيير."},
+      {en:"Render Out",ar:"نقطة نهاية التصيير",desc:"الوقت الذي ينتهي عنده التصيير."},
+      {en:"Field Dominance",ar:"هيمنة المجال",desc:"للفيديو المضفر: أي مجال يُعرض أولًا."},
+      {en:"Pixel Aspect Ratio",ar:"نسبة عرض البكسل",desc:"شكل البكسل (مربع أو مستطيل)."},
+      {en:"Square Pixels",ar:"بكسلات مربعة",desc:"النوع القياسي في الفيديو الحديث."},
+      {en:"Non-Square Pixels",ar:"بكسلات غير مربعة",desc:"تُستخدم في الفيديو القياسي القديم."},
+      {en:"Letterbox",ar:"الصندوق البريدي",desc:"إضافة شرائط سوداء أعلى وأسفل الصورة."},
+      {en:"Pillarbox",ar:"الصندوق العمودي",desc:"إضافة شرائط سوداء على الجانبين."},
+      {en:"Crop",ar:"اقتصاص",desc:"إزالة أجزاء من حواف الصورة."},
+      {en:"Scale",ar:"الحجم",desc:"تغيير حجم المقطع."},
+      {en:"Position",ar:"الموضع",desc:"مكان المقطع على الشاشة."},
+      {en:"Rotation",ar:"الدوران",desc:"تدوير المقطع حول محوره."},
+      {en:"Anchor Point",ar:"نقطة الارتساء",desc:"النقطة التي تدور أو تتغير حولها العناصر."},
+      {en:"Blending Mode",ar:"وضع المزج",desc:"كيف يتفاعل المقطع مع ما تحته."},
+      {en:"Opacity Keyframe",ar:"إطار مفتاحي للعتامة",desc:"تحكم في الشفافية مع الوقت."},
+      {en:"Audio Keyframe",ar:"إطار مفتاحي صوتي",desc:"تحكم في مستوى الصوت مع الوقت."},
+      {en:"Nested Sequence",ar:"تسلسل متداخل",desc:"تسلسل داخل تسلسل آخر."},
+      {en:"Dynamic Link",ar:"الربط الديناميكي",desc:"تكامل بين برامج أدوبي دون تصيير."},
+      {en:"Media Browser",ar:"مستعرض الوسائط",desc:"أداة لتصفح الملفات داخل البرنامج."},
+      {en:"Logging",ar:"التسجيل",desc:"تدوين ملاحظات عن المقاطع أثناء التصوير."},
+      {en:"Shot List",ar:"قائمة اللقطات",desc:"جدول باللقطات المطلوبة للتصوير."},
+      {en:"Storyboard",ar:"القصة المصورة",desc:"رسم تخطيطي للقطات قبل التصوير."},
+      {en:"Rough Assembly",ar:"تجميع أولي",desc:"ترتيب أولي للمقاطع حسب السيناريو."},
+      {en:"Fine Tuning",ar:"الضبط الدقيق",desc:"تعديلات دقيقة على التوقيت والتأثيرات."},
+      {en:"Audio Mix",ar:"خلط الصوت",desc:"دمج وضبط مستويات القنوات الصوتية."},
+      {en:"Master Track",ar:"المسار الرئيسي",desc:"المسار النهائي لجميع مسارات الصوت."},
+      {en:"Submix",ar:"خلط فرعي",desc:"دمج عدة مسارات في مسار واحد."},
+      {en:"Automation",ar:"الأتمتة",desc:"تسجيل التعديلات على الصوت تلقائيًا."},
+      {en:"Clip Gain",ar:"تكبير المقطع",desc:"ضبط مستوى الصوت قبل المعالجة."},
+      {en:"Track Height",ar:"ارتفاع المسار",desc:"حجم عرض المسار في الخط الزمني."},
+      {en:"Track Lock",ar:"قفل المسار",desc:"منع التعديل على المسار."},
+      {en:"Track Mute",ar:"كتم المسار",desc:"إخفاء الصوت أو الفيديو في المسار."},
+      {en:"Track Solo",ar:"عزل المسار",desc:"سماع أو رؤية مسار واحد فقط."},
+      {en:"Sync Lock",ar:"قفل المزامنة",desc:"الحفاظ على مزامنة المقاطع عند التعديل."},
+      {en:"Linked Selection",ar:"التحديد المرتبط",desc:"اختيار الصوت والفيديو معًا."},
+      {en:"Unlink",ar:"فك الارتباط",desc:"فصل الصوت عن الفيديو."},
+      {en:"Relink Media",ar:"إعادة ربط الوسائط",desc:"ربط الملفات المفقودة."},
+      {en:"Interpret Footage",ar:"تفسير اللقطات",desc:"تغيير إعدادات الملف (مثل معدل الإطارات)."},
+      {en:"Frame Blending",ar:"مزج الإطارات",desc:"تحسين مظهر التباطؤ عبر مزج الإطارات."},
+      {en:"Optical Flow",ar:"التدفق البصري",desc:"تقنية متقدمة لإنشاء إطارات وهمية للتباطؤ."},
+      {en:"Time Interpolation",ar:"استيفاء الوقت",desc:"طريقة تغيير السرعة (Frame Sampling, Frame Blending, Optical Flow)."},
+      {en:"Posterize Time",ar:"تجميد الوقت",desc:"تحويل الفيديو إلى سلسلة من الإطارات الثابتة."},
+      {en:"Echo",ar:"الصدى",desc:"تكرار الصورة أو الصوت مع تأخير."},
+      {en:"Gaussian Blur",ar:"طمس غاوسي",desc:"تأثير طمس ناعم."},
+      {en:"Sharpen",ar:"التحديد",desc:"زيادة وضوح التفاصيل."},
+      {en:"Noise",ar:"الضوضاء",desc:"إضافة أو إزالة التشويش من الصورة."},
+      {en:"Grain",ar:"الحبيبات",desc:"إضافة مظهر فيلم سينمائي."},
+      {en:"Vignette",ar:"التظليل",desc:"تغميق حواف الصورة."},
+      {en:"Lens Flare",ar:"وهج العدسة",desc:"تأثير ضوئي يشبه وهج الشمس على العدسة."},
+      {en:"Chromatic Aberration",ar:"الانحراف اللوني",desc:"تشوه ألوان الحواف (أحمر/أزرق)."},
+      {en:"Deform",ar:"التشويه",desc:"تغيير شكل الصورة بشكل غير خطي."},
+      {en:"Warp",ar:"الالتواء",desc:"تشويه مرن للصورة."},
+      {en:"Displacement Map",ar:"خريطة الإزاحة",desc:"استخدام صورة للتحكم في تشويه أخرى."},
+      {en:"Matte Choker",ar:"خانق المات",desc:"تحسين حواف القناع."},
+      {en:"Spill Suppressor",ar:"مثبط الانسكاب",desc:"إزالة لون الخلفية المنعكس على الموضوع."},
+      {en:"Key Cleaner",ar:"منظف المفتاح",desc:"تحسين نتيجة المفتاح اللوني."},
+      {en:"3D Camera Tracker",ar:"متتبع الكاميرا ثلاثية الأبعاد",desc:"إضافة عناصر 3D تتفاعل مع حركة الكاميرا."},
+      {en:"Motion Tracker",ar:"متتبع الحركة",desc:"تتبع كائن متحرك في الفيديو."},
+      {en:"Stabilize Motion",ar:"تثبيت الحركة",desc:"إزالة الاهتزاز من اللقطة."},
+      {en:"Auto Reframe",ar:"إعادة الإطار التلقائي",desc:"تعديل الفيديو تلقائيًا لنسب عرض مختلفة."},
+      {en:"Essential Sound",ar:"الصوت الأساسي",desc:"لوحة مبسطة لمعالجة الصوت في أدوبي."},
+      {en:"Essential Graphics",ar:"الرسوم الأساسية",desc:"لوحة لإنشاء وتعديل العناوين والرسوم."},
+      {en:"Lumetri Color",ar:"لون لومتري",desc:"لوحة احترافية لتصحيح وتصنيف الألوان."},
+      {en:"Speed/Duration",ar:"السرعة/المدة",desc:"تغيير طول أو سرعة المقطع."},
+      {en:"Rate Stretch",ar:"تمديد المعدل",desc:"تغيير سرعة المقطع بسحب الحواف."},
+      {en:"Timecode Burn-in",ar:"حفر الكود الزمني",desc:"عرض الكود الزمني على الفيديو."},
+      {en:"Audio Sample Rate",ar:"معدل عينة الصوت",desc:"عدد العينات في الثانية (مثل 48kHz)."},
+      {en:"Bit Depth",ar:"عمق البت",desc:"دقة لون الصورة أو دقة الصوت (8-bit, 10-bit, 32-bit float)."},
+      {en:"Log Footage",ar:"لقطات لوج",desc:"لقطات بتنسيق مسطح لحفظ تفاصيل الإضاءة."},
+      {en:"RAW Video",ar:"فيديو خام",desc:"بيانات غير معالجة من المستشعر."},
+      {en:"Dynamic Range",ar:"المدى الديناميكي",desc:"الفرق بين أفتح وأغمق جزء في الصورة."},
+      {en:"Highlight",ar:"الإضاءة العالية",desc:"أفتح أجزاء في الصورة."},
+      {en:"Shadow",ar:"الظل",desc:"أغمق أجزاء في الصورة."},
+      {en:"Midtone",ar:"الدرجات المتوسطة",desc:"المنطقة بين الإضاءة والظل."},
+      {en:"Saturation",ar:"التشبع",desc:"شدة الألوان."},
+      {en:"Hue",ar:"الصبغة",desc:"لون البكسل (أحمر، أخضر...)."},
+      {en:"Luminance",ar:"السطوع",desc:"درجة إشراق البكسل."},
+      {en:"Contrast",ar:"التباين",desc:"الفرق بين الألوان الفاتحة والداكنة."},
+      {en:"Exposure",ar:"التعرض",desc:"كمية الضوء في الصورة."},
+      {en:"White Balance",ar:"توازن اللون الأبيض",desc:"جعل الأبيض يبدو أبيض تحت إضاءة مختلفة."},
+      {en:"Tint",ar:"الصبغ",desc:"إضافة لون خفيف (غالبًا أخضر/أرجواني)."},
+      {en:"Temperature",ar:"درجة الحرارة",desc:"دفء أو برودة الصورة (أصفر/أزرق)."},
+      {en:"Vibrance",ar:"الحيوية",desc:"زيادة تشبع الألوان الباهتة فقط."},
+      {en:"Clarity",ar:"الوضوح",desc:"تعزيز التفاصيل المتوسطة."},
+      {en:"Dehaze",ar:"إزالة الضباب",desc:"تقليل الضباب أو الضباب الدخاني."},
+      {en:"Curves",ar:"المنحنيات",desc:"أداة دقيقة لضبط الألوان والإضاءة."},
+      {en:"Color Wheels",ar:"عجلات الألوان",desc:"ضبط الظلال، الدرجات المتوسطة، والإضاءة."},
+      {en:"Scopes Panel",ar:"لوحة المنظار",desc:"تحليل فني للفيديو."},
+      {en:"Audio Meters",ar:"عدادات الصوت",desc:"عرض مستويات الصوت."},
+      {en:"Track Matte",ar:"مات المسار",desc:"استخدام مقطع كقناع لآخر."},
+      {en:"Alpha Matte",ar:"مات ألفا",desc:"استخدام قناة ألفا كقناع."},
+      {en:"Luma Matte",ar:"مات لمعة",desc:"استخدام السطوع كقناع."},
+      {en:"Garbage Matte",ar:"مات القمامة",desc:"قناع خشن لإخفاء أجزاء غير مرغوب فيها."},
+      {en:"Rotoscoping",ar:"الرسم الإطاري",desc:"رسم يدوي لعزل كائن عبر الإطارات."},
+      {en:"Keying",ar:"المفتاح",desc:"إزالة خلفية بلون محدد."},
+      {en:"Difference Matte",ar:"مات الفرق",desc:"عزل كائن بناءً على فرق بين لقطتين."},
+      {en:"Camera Lens Blur",ar:"طمس عدسة الكاميرا",desc:"محاكاة عمق الميدان."},
+      {en:"Depth of Field",ar:"عمق الميدان",desc:"منطقة الوضوح في الصورة."},
+      {en:"Bokeh",ar:"البوكيه",desc:"طبيعة الطمس خلف الموضوع."},
+      {en:"Focal Length",ar:"البعد البؤري",desc:"طول العدسة (مثل 50mm)."},
+      {en:"Aperture",ar:"الفتحة",desc:"حجم فتحة العدسة (تتحكم في عمق الميدان)."},
+      {en:"Shutter Speed",ar:"سرعة الغالق",desc:"مدة فتح الغالق (تؤثر على الحركة)."},
+      {en:"ISO",ar:"الحساسية",desc:"حساسية المستشعر للضوء."},
+      {en:"ND Filter",ar:"فلتر كثافة محايدة",desc:"يقلل الضوء دون تغيير الألوان."},
+      {en:"Polarizing Filter",ar:"فلتر استقطاب",desc:"يقلل الانعكاسات ويزيد التشبع."},
+      {en:"Mosquito Noise",ar:"ضوضاء البعوض",desc:"اهتزاز حول الحواف."},
+      {en:"Color Bleeding",ar:"تسرب اللون",desc:"انتشار اللون من منطقة إلى أخرى غير مرغوب فيه."},
+      // إضافة مصطلحات نادرة
+      {en:"Anamorphic Lens",ar:"عدسة أنامورفيك",desc:"عدسة تُستخدم لتصوير صورة بعرض واسع."},
+      {en:"Anamorphic Squeeze",ar:"ضغط أنامورفيك",desc:"طريقة لضغط الصورة لاحتوائها على شاشة واسعة."},
+      {en:"Pull Focus",ar:"سحب البؤرة",desc:"تغيير البؤرة أثناء التصوير لنقل الاهتمام."},
+      {en:"Focus Rack",ar:"تبديل البؤرة",desc:"تغيير البؤرة من كائن إلى آخر بسرعة."},
+      {en:"Dolly In",ar:"تقريب العربة",desc:"تحريك الكاميرا نحو الكائن."},
+      {en:"Dolly Out",ar:"ابتعاد العربة",desc:"تحريك الكاميرا بعيدًا عن الكائن."},
+      {en:"Push In",ar:"دفع داخلي",desc:"تحريك الكاميرا نحو الموضوع (ليس Zoom)."},
+      {en:"Push Out",ar:"دفع خارجي",desc:"تحريك الكاميرا بعيدًا عن الموضوع (ليس Zoom)."},
+      {en:"Tilt Shift",ar:"تحريك الميل",desc:"تأثير بصري يُستخدم لجعل المشهد يبدو كنماذج."},
+      {en:"Tilt-Shift Lens",ar:"عدسة تيلت-شيفت",desc:"عدسة تُستخدم لإنشاء تأثيرات تيلت-شيفت."},
+      {en:"Bokeh Shift",ar:"تحريك البوكيه",desc:"تغيير تأثير البوكيه أثناء التصوير."},
+      {en:"Focus Breathing",ar:"تنفس البؤرة",desc:"تأثير يُحدث تغييرًا بسيطًا في الزاوية عند تغيير البؤرة."},
+      {en:"Focus Pulling",ar:"سحب البؤرة",desc:"تلاعب دقيق في البؤرة أثناء التصوير."},
+      {en:"Focus Peaking",ar:"تلميع البؤرة",desc:"أداة تُستخدم لتحديد مناطق البؤرة."},
+      {en:"Focus Assist",ar:"مساعد البؤرة",desc:"أداة تساعد في ضبط البؤرة بدقة."},
+      {en:"Focus Tracking",ar:"تتبع البؤرة",desc:"تتبع البؤرة تلقائيًا للكائن المتحرك."},
+      {en:"Focus Ring",ar:"حلقة البؤرة",desc:"حلقة على العدسة تُستخدم لضبط البؤرة."},
+      {en:"Focus Mode",ar:"وضع البؤرة",desc:"يحدد ما إذا كانت البؤرة تلقائية أو يدوية."},
+      {en:"Focus Lock",ar:"قفل البؤرة",desc:"تثبيت البؤرة على كائن معين."},
+      {en:"Focus Follow",ar:"متابعة البؤرة",desc:"البؤرة تتبع الكائن المتحرك."},
+      {en:"Focus Distance",ar:"مسافة البؤرة",desc:"المسافة التي تكون فيها الصورة واضحة."},
+      {en:"Focus Plane",ar:"مستوى البؤرة",desc:"المساحة التي تكون فيها الصورة واضحة."},
+      {en:"Focus Scale",ar:"مقياس البؤرة",desc:"مقياس يُظهر مسافة البؤرة."},
+      {en:"Gimbal",ar:"الجيمبال",desc:"جهاز تثبيت إلكتروني للكاميرا."},
+      {en:"Slider",ar:"السلايدر",desc:"سكة لحركة الكاميرا الجانبية."},
+      {en:"Zoom In",ar:"تقريب",desc:"زيادة حجم الموضوع في الإطار."},
+      {en:"Zoom Out",ar:"تباعد",desc:"تقليل حجم الموضوع في الإطار."},
+      {en:"Dolly Zoom",ar:"زوم العربة",desc:"تحريك الكاميرا للخلف أو للأمام مع عكس تغيير البعد البؤري لإنشاء تأثير دراماتيكي (يُعرف بتأثير فيرتيجو)."},
+      {en:"Crash Zoom",ar:"تقريب مفاجئ",desc:"تقريب سريع جدًا للتركيز على تفصيل."},
+      {en:"Whip Pan",ar:"مقلاة سريعة",desc:"حركة سريعة جدًا تخلق ضبابية."},
+      {en:"Freeze Frame",ar:"تجميد الإطار",desc:"إيقاف حركة الفيديو على إطار واحد."},
+      {en:"Flash Frame",ar:"إطار وميض",desc:"إطار واحد أبيض أو أسود لإنشاء تأثير."},
+      {en:"Strobe Effect",ar:"تأثير الوميض",desc:"تكرار الإطارات بسرعة لإنشاء وميض."},
+      {en:"Reverse",ar:"عكس",desc:"تشغيل الفيديو أو الصوت بشكل معكوس."},
+      {en:"Loop",ar:"تكرار",desc:"إعادة تشغيل المقطع بشكل مستمر."},
+      {en:"Hold Frame",ar:"إطار ثابت",desc:"تمديد إطار واحد لفترة زمنية."},
+      {en:"Time Remap Speed",ar:"سرعة إعادة التعيين الزمني",desc:"التحكم في سرعة الفيديو عبر الإطارات المفتاحية."},
+      {en:"Audio Time Stretch",ar:"تمديد وقت الصوت",desc:"تغيير مدة الصوت دون تغيير النغمة."},
+      {en:"Pitch Shift",ar:"تغيير النغمة",desc:"رفع أو خفض نغمة الصوت."},
+      {en:"Reverb",ar:"الصدى الصوتي",desc:"إضافة انعكاسات صوتية لمحاكاة البيئة."},
+      {en:"Delay",ar:"التأخير",desc:"تكرار الصوت بعد فترة قصيرة."},
+      {en:"Chorus",ar:"الكورس",desc:"تأثير صوتي يُضاعف الصوت مع اختلافات طفيفة."},
+      {en:"Flanger",ar:"الفلانجر",desc:"تأثير صوتي يُنتج صوتًا مجوفًا أو يشبه الدوران، ناتج عن تأخير إشارة مكررة."},
+      {en:"Phaser",ar:"الفايزر",desc:"تأثير صوتي يخلق تجويفات في التردد."},
+      {en:"Distortion",ar:"التشويه",desc:"تحريف الصوت لإنشاء صوت خشن."},
+      {en:"EQ",ar:"المعادل",desc:"اختصار لـ Equalizer."},
+      {en:"Compressor",ar:"الضاغط",desc:"اختصار لـ Compression."},
+      {en:"Limiter",ar:"الحدّاد",desc:"ضاغط قوي لمنع تجاوز الذروة."},
+      {en:"Expander",ar:"المُوسع",desc:"عكس الضاغط: يوسع الفروق بين الصوت العالي والمنخفض."},
+      {en:"Gate",ar:"البوابة",desc:"يكتم الصوت إذا كان أقل من عتبة معينة."},
+      {en:"De-esser",ar:"مُزيل الصفير",desc:"يقلل الأصوات الحادة (مثل 'س')."},
+      {en:"Click Removal",ar:"إزالة النقرات",desc:"إزالة الأصوات المفاجئة من التسجيل."},
+      {en:"Hum Removal",ar:"إزالة الهمهمة",desc:"إزالة الترددات المنخفضة الثابتة (مثل 50Hz)."},
+      {en:"Audio Restoration",ar:"استعادة الصوت",desc:"تنظيف التسجيلات القديمة أو التالفة."},
+      {en:"Spectral Repair",ar:"الإصلاح الطيفي",desc:"إزالة الضوضاء عبر تحليل الطيف."},
+      {en:"ADR Studio",ar:"استوديو إعادة التسجيل",desc:"غرفة مخصصة لإعادة تسجيل الحوار."},
+      {en:"Foley",ar:"الصوتيات التمثيلية",desc:"إنشاء أصوات مؤثرات يدويًا (خطوات، أبواب...)."},
+      {en:"Sound Design",ar:"تصميم الصوت",desc:"إنشاء ودمج المؤثرات الصوتية."},
+      {en:"Mixing Console",ar:"لوحة الخلط",desc:"أداة لخلط القنوات الصوتية."},
+      {en:"DAW",ar:"محطة عمل صوتية رقمية",desc:"برنامج لتحرير الصوت (مثل Pro Tools)."},
+      {en:"NLE",ar:"محرر فيديو غير خطي",desc:"برنامج مونتاج حديث (مثل Premiere)."},
+      {en:"Linear Editing",ar:"التحرير الخطي",desc:"طريقة قديمة تعتمد على الترتيب الزمني الثابت."},
+      {en:"Non-Linear Editing",ar:"التحرير غير الخطي",desc:"التحرير الحر لأي جزء في أي وقت."},
+      {en:"Offline Quality",ar:"جودة غير متصلة",desc:"جودة منخفضة تُستخدم في مرحلة المونتاج الأولي."},
+      {en:"Online Quality",ar:"جودة متصلة",desc:"جودة عالية تُستخدم في التصدير النهائي."},
+      {en:"Mastering",ar:"الماسترينغ",desc:"اللمسات النهائية على الصوت أو الفيديو."},
+      {en:"Versioning",ar:"الإصدارات",desc:"إنشاء نسخ مختلفة من الفيديو (للسوشيال ميديا، التلفزيون...)."},
+      {en:"Deliverables",ar:"التسليمات",desc:"الملفات النهائية المطلوبة من العميل."},
+      {en:"Codec Settings",ar:"إعدادات المرمز",desc:"خيارات ضغط الفيديو (H.264, ProRes...)."},
+      {en:"Bitrate Mode",ar:"وضع معدل البت",desc:"ثابت (CBR) أو متغير (VBR)."},
+      {en:"Keyframe Interval",ar:"فترة الإطار المفتاحي",desc:"المسافة بين الإطارات المفتاحية في الفيديو المضغوط."},
+      {en:"GOP",ar:"مجموعة الصور",desc:"مجموعة من الإطارات بين إطارات مفتاحية."},
+      {en:"I-Frame",ar:"إطار مفتاحي",desc:"إطار كامل يُخزن كل البيانات."},
+      {en:"P-Frame",ar:"إطار تنبؤي",desc:"إطار يخزن الفروق عن الإطار السابق."},
+      {en:"B-Frame",ar:"إطار ثنائي التنبؤ",desc:"إطار يخزن الفروق عن الإطارين السابق واللاحق."},
+      {en:"Chroma Subsampling",ar:"تقليل عينة اللون",desc:"ضغط الألوان (مثل 4:2:0)."},
+      {en:"Color Space",ar:"فضاء اللون",desc:"نظام تمثيل الألوان (Rec.709, Rec.2020...)."},
+      {en:"Gamma",ar:"غاما",desc:"توزيع الإضاءة في الصورة."},
+      {en:"Log Gamma",ar:"غاما لوج",desc:"منحنى غاما لحفظ تفاصيل الإضاءة."},
+      {en:"HDR",ar:"نطاق ديناميكي عالي",desc:"فيديو بتفاصيل أكثر في الإضاءة والظل."},
+      {en:"SDR",ar:"نطاق ديناميكي قياسي",desc:"النطاق القياسي للفيديو."},
+      {en:"Frame Hold",ar:"إمساك الإطار",desc:"تجميد الإطار عند نقطة معينة."},
+      {en:"Poster Frame",ar:"إطار الملصق",desc:"الإطار المستخدم كصورة مصغرة."},
+      {en:"Proxy Reconnect",ar:"إعادة ربط الوسيط",desc:"ربط الملفات الأصلية بعد الانتهاء من المونتاج."},
+      {en:"Smart Collection",ar:"مجموعة ذكية",desc:"مجموعة ديناميكية تعتمد على شروط معينة."},
+      {en:"Keyword",ar:"كلمة مفتاحية",desc:"وسم يُضاف للمقاطع للبحث السريع."},
+      {en:"Rating",ar:"التقييم",desc:"تقييم المقاطع بنجوم أو ألوان."},
+      {en:"Transcription",ar:"النسخ",desc:"تحويل الصوت إلى نص داخل البرنامج."},
+      {en:"Speech-to-Text",ar:"الكلام إلى نص",desc:"تقنية لتحويل الحوار إلى نص تلقائيًا."},
+      {en:"Auto Caption",ar:"توضيح تلقائي",desc:"إنشاء تسميات توضيحية من النص المكتوب."},
+      {en:"Subtitles",ar:"الترجمة",desc:"نصوص مترجمة للفيديو."},
+      {en:"Closed Captions",ar:"التسميات المغلقة",desc:"نصوص يمكن تفعيلها أو إيقافها."},
+      {en:"Burned-in Captions",ar:"تسميات محروقة",desc:"نصوص ثابتة على الفيديو لا يمكن إزالتها."},
+      {en:"Time Remapping Envelope",ar:"ظرف إعادة التعيين الزمني",desc:"خط يتحكم في سرعة الفيديو على الخط الزمني."},
+      {en:"Audio Ducking Automation",ar:"أتمتة خفض الصوت",desc:"خفض صوت الخلفية تلقائيًا عند ظهور الحوار."},
+      {en:"Loudness Radar",ar:"رادار الصوت العالي",desc:"أداة لقياس مستوى الصوت وفق المعايير."},
+      {en:"LUFS",ar:"وحدات الصوت الكاملة",desc:"وحدة قياس لمستوى الصوت المدرك."},
+      {en:"True Peak",ar:"الذروة الحقيقية",desc:"أعلى مستوى صوتي بعد إعادة البناء."},
+      {en:"Sample Peak",ar:"ذروة العينة",desc:"أعلى قيمة في عينات الصوت الرقمية."},
+      {en:"Phase",ar:"الطور",desc:"العلاقة الزمنية بين قنوات الصوت."},
+      {en:"Phase Cancellation",ar:"إلغاء الطور",desc:"اختفاء الصوت عند دمج قنوات متعاكسة."},
+      {en:"Mono Compatibility",ar:"التوافق الأحادي",desc:"اختبار كيف يبدو الستيريو عند تحويله لأحادي."},
+      {en:"Audio Panning Law",ar:"قانون موازنة الصوت",desc:"كيف يُخفض الصوت عند التحريك بين القنوات."},
+      {en:"Headroom",ar:"المساحة الاحتياطية",desc:"الفرق بين الذروة وأعلى مستوى مسموح."},
+      {en:"Dynamic Processing",ar:"المعالجة الديناميكية",desc:"التحكم في التغيرات في مستوى الصوت."},
+      {en:"Sidechain",ar:"السلسلة الجانبية",desc:"استخدام إشارة صوتية للتحكم في معالجة أخرى."},
+      {en:"Multiband Compression",ar:"ضغط متعدد النطاقات",desc:"ضغط منفصل لكل نطاق ترددي."},
+      {en:"Stereo Imaging",ar:"تصوير ستيريو",desc:"التحكم في عرض الصوت بين اليسار واليمين."},
+      {en:"Mid/Side Processing",ar:"معالجة المنتصف/الجانب",desc:"معالجة الصوت المشترك والمنفصل بين القنوات."},
+      {en:"Dither",ar:"التذرية",desc:"إضافة ضوضاء منخفضة لتحسين جودة الصوت عند خفض العمق."},
+      {en:"Sample Rate Conversion",ar:"تحويل معدل العينة",desc:"تغيير معدل العينة مع الحفاظ على الجودة."},
+      {en:"Bit Depth Conversion",ar:"تحويل عمق البت",desc:"تغيير عمق البت مع التذرية."},
+      {en:"Real-time Playback",ar:"التشغيل الفوري",desc:"عرض الفيديو بدون تأخير."},
+      {en:"Playback Resolution",ar:"دقة التشغيل",desc:"جودة المعاينة (كاملة، نصف، ربع...)."},
+      {en:"Proxy Toggle",ar:"تبديل الوسيط",desc:"التحول بين الملفات الأصلية والوسيطة."},
+      {en:"Render Effects",ar:"تصيير التأثيرات",desc:"معالجة التأثيرات لتشغيل سلس."},
+      {en:"Unrendered",ar:"غير مُصيّر",desc:"مقطع يحتاج تصيير لتشغيله بسلاسة."},
+      {en:"Render File",ar:"ملف التصيير",desc:"الملف المؤقت الناتج عن التصيير."},
+      {en:"Conform",ar:"المواءمة",desc:"استبدال الملفات الوسيطة بالأصلية للتصدير."},
+      {en:"Assembly Edit",ar:"تحرير التجميع",desc:"ترتيب أولي للمقاطع حسب التسلسل الزمني."},
+      {en:"Montage",ar:"المونتاج",desc:"تسلسل لقطات يعرض مرور الوقت أو فكرة."},
+      {en:"Parallel Editing",ar:"التحرير المتوازي",desc:"عرض حدثين في وقت واحد."},
+      {en:"Cross Cutting",ar:"القطع المتقاطع",desc:"التنقل بين مشهدين متوازيين."},
+      {en:"Invisible Cut",ar:"القطع غير المرئي",desc:"انتقال سلس لا يشعر به المشاهد."},
+      {en:"Graphic Match",ar:"مطابقة رسومية",desc:"انتقال عبر تشابه بصري بين لقطتين."},
+      {en:"Motif",ar:"الحافز",desc:"عنصر بصري أو صوتي يتكرر لتعزيز الفكرة."},
+      {en:"Leitmotif",ar:"الحافز الموسيقي",desc:"لحن يتكرر مع شخصية أو فكرة."},
+      {en:"Diegetic Sound",ar:"الصوت الحكائي",desc:"صوت موجود داخل عالم الفيلم (مثل حوار)."},
+      {en:"Non-Diegetic Sound",ar:"الصوت غير الحكائي",desc:"صوت خارج عالم الفيلم (مثل الموسيقى التصويرية)."},
+      {en:"Ambient Sound",ar:"الصوت المحيطي",desc:"أصوات الخلفية التي تخلق الجو."},
+      {en:"Room Tone",ar:"نغمة الغرفة",desc:"صوت خلفية خالص لغرفة معينة."},
+      {en:"Wild Track",ar:"المسار الحر",desc:"صوت مسجل دون فيديو."},
+      {en:"Sync Sound",ar:"الصوت المتزامن",desc:"صوت مسجل مع الفيديو في نفس الوقت."},
+      {en:"Double System Sound",ar:"صوت نظام مزدوج",desc:"تسجيل الصوت والفيديو على جهازين منفصلين."},
+      {en:"Timecode Sync",ar:"مزامنة الكود الزمني",desc:"استخدام الكود الزمني لمزامنة الصوت والفيديو."},
+      {en:"Clapper Sync",ar:"مزامنة اللوحة",desc:"استخدام لوحة التصوير للمزامنة البصرية والصوتية."},
+      {en:"PluralEyes",ar:"بليور آيز",desc:"برنامج لمزامنة الصوت والفيديو تلقائيًا."},
+      {en:"Audio Alignment",ar:"محاذاة الصوت",desc:"محاذاة المسارات الصوتية تلقائيًا."},
+      {en:"Noise Print",ar:"بصمة الضوضاء",desc:"عينة من الضوضاء تُستخدم لإزالتها."},
+      {en:"Spectral Frequency Display",ar:"عرض التردد الطيفي",desc:"تمثيل مرئي للترددات عبر الزمن."},
+      {en:"Phase Scope",ar:"منظار الطور",desc:"أداة لتحليل العلاقة بين القنوات الصوتية."},
+      {en:"Correlation Meter",ar:"عداد الارتباط",desc:"يقيس التماسك بين القناتين الستيريو."},
+      {en:"K-System",ar:"نظام كي",desc:"نظام معايرة صوتية لمستويات موحدة."},
+      {en:"EBU R128",ar:"معيار EBU R128",desc:"معيار أوروبي لمستوى الصوت."},
+      {en:"ATSC A/85",ar:"معيار ATSC A/85",desc:"معيار أمريكي لمستوى الصوت."},
+      {en:"CALM Act",ar:"قانون CALM",desc:"قانون أمريكي لمنع اختلاف مستويات الصوت في الإعلانات."},
+      {en:"Loudness Normalization",ar:"توحيد الصوت العالي",desc:"ضبط مستوى الصوت وفق المعايير."},
+      {en:"True Peak Limiting",ar:"الحد من الذروة الحقيقية",desc:"منع التشويه عند التشغيل التناظري."},
+      {en:"Intersample Peaks",ar:"القمم بين العينات",desc:"ذروات قد تظهر بين العينات الرقمية."},
+      {en:"Oversampling",ar:"العينة الزائدة",desc:"تقنية للكشف عن القمم بين العينات."},
+      {en:"Look-ahead",ar:"الاستباق",desc:"تأخير بسيط لمعالجة الصوت بشكل استباقي."},
+      {en:"Latency",ar:"التأخير",desc:"الوقت بين الإدخال والإخراج في النظام."},
+      {en:"Buffer Size",ar:"حجم المخزن المؤقت",desc:"يؤثر على الأداء والتأخير في النظام."},
+      {en:"ASIO",ar:"ASIO",desc:"بروتوكول صوتي منخفض التأخير لأنظمة ويندوز."},
+      {en:"Core Audio",ar:"كور أوديو",desc:"نظام صوتي لأنظمة ماك."},
+      {en:"Audio Interface",ar:"واجهة صوت",desc:"جهاز لتحويل الصوت التناظري إلى رقمي."},
+      {en:"Preamp",ar:"مكبر الصوت الأولي",desc:"يقوي الإشارة من الميكروفون."},
+      {en:"Phantom Power",ar:"الطاقة الوهمية",desc:"طاقة تُرسل عبر الكابل لتشغيل الميكروفونات المكثفية."},
+      {en:"XLR",ar:"XLR",desc:"نوع كابل صوتي احترافي."},
+      {en:"TRS",ar:"TRS",desc:"نوع كابل صوتي (Tip-Ring-Sleeve)."},
+      {en:"TS",ar:"TS",desc:"نوع كابل صوتي أحادي (Tip-Sleeve)."},
+      {en:"Balanced Audio",ar:"صوت متوازن",desc:"نقل صوتي مقاوم للتداخل."},
+      {en:"Unbalanced Audio",ar:"صوت غير متوازن",desc:"نقل صوتي عرضة للتداخل."},
+      {en:"Ground Loop",ar:"حلقة أرضية",desc:"سبب شائع للهمهمة في الصوت."},
+      {en:"Hum Eliminator",ar:"مُزيل الهمهمة",desc:"جهاز لإزالة الهمهمة الناتجة عن الحلقة الأرضية."},
+      {en:"DI Box",ar:"صندوق DI",desc:"يحوّل الإشارة غير المتوازنة إلى متوازنة."},
+      {en:"Pop Filter",ar:"مرشح النقرات",desc:"يقلل الانفجارات الصوتية من الحروف (ب، ت)."},
+      {en:"Windscreen",ar:"واقي الرياح",desc:"يقلل الضوضاء الناتجة عن الرياح."},
+      {en:"Shock Mount",ar:"حامل مضاد للاهتزاز",desc:"يقلل الاهتزازات الميكانيكية على الميكروفون."},
+      {en:"Boom Pole",ar:"ذراع الميكروفون",desc:"قضيب طويل لحمل الميكروفون فوق المشهد."},
+      {en:"Lavalier Mic",ar:"ميكروفون ربطة العنق",desc:"ميكروفون صغير يُعلق على الملابس."},
+      {en:"Shotgun Mic",ar:"ميكروفون بندقية",desc:"ميكروفون اتجاهي عالي الحساسية."},
+      {en:"Condenser Mic",ar:"ميكروفون مكثف",desc:"ميكروفون حساس يحتاج طاقة وهمية."},
+      {en:"Dynamic Mic",ar:"ميكروفون ديناميكي",desc:"ميكروفون متين لا يحتاج طاقة."},
+      {en:"Ribbon Mic",ar:"ميكروفون شريطي",desc:"ميكروفون حساس بتصميم شريطي تقليدي."},
+      {en:"Frequency Response",ar:"استجابة التردد",desc:"نطاق الترددات التي يمكن للميكروفون التقاطها."},
+      {en:"Polar Pattern",ar:"نمط الاتجاهية",desc:"شكل حساسية الميكروفون (قلبي، دائري...)."},
+      {en:"Cardioid",ar:"قلبي",desc:"نمط اتجاهي يلتقط الصوت من الأمام."},
+      {en:"Supercardioid",ar:"فوق قلبي",desc:"نمط أكثر تركيزًا مع بعض الحساسية من الخلف."},
+      {en:"Hypercardioid",ar:"فائقة القلبية",desc:"تركيز أعلى مع حساسية خلفية أكبر."},
+      {en:"Omnidirectional",ar:"ميكروفون دائري الاتجاه",desc:"يلتقط الصوت من جميع الاتجاهات."},
+      {en:"Figure-8",ar:"شكل 8",desc:"يلتقط الصوت من الأمام والخلف، ويرفض الجوانب."},
+      {en:"Proximity Effect",ar:"تأثير القرب",desc:"زيادة الترددات المنخفضة عند استخدام الميكروفون عن قرب."},
+      {en:"Off-axis Coloration",ar:"تلوين خارج المحور",desc:"تغير في الصوت عند عدم التحدث مباشرة للميكروفون."},
+      {en:"Self-noise",ar:"الضوضاء الذاتية",desc:"الضوضاء التي يولدها الميكروفون عند عدم وجود إشارة."},
+      {en:"Max SPL",ar:"أقصى مستوى ضغط صوتي",desc:"أعلى صوت يمكن للميكروفون تحمله دون تشويه."},
+      {en:"Attenuation Pad",ar:"وسادة التوهين",desc:"تخفض مستوى الإشارة الداخلة للميكروفون."},
+      {en:"High-pass Filter",ar:"مرشح تمرير عالي",desc:"يزيل الترددات المنخفضة غير المرغوب فيها."},
+      {en:"Low-cut Filter",ar:"مرشح قطع منخفض",desc:"نفس مرشح التمرير العالي."},
+      {en:"Gain Staging",ar:"تدرج التكبير",desc:"ضبط مستويات التكبير في كل مرحلة لتجنب التشويه."},
+      {en:"Headroom Management",ar:"إدارة المساحة الاحتياطية",desc:"الحفاظ على مساحة كافية لتجنب الذروة."},
+      {en:"Digital Full Scale",ar:"المقياس الرقمي الكامل",desc:"أعلى مستوى رقمي ممكن (0 dBFS)."},
+      {en:"dBFS",ar:"ديسيبل بالنسبة للمقياس الكامل",desc:"وحدة قياس الصوت الرقمي."},
+      {en:"VU",ar:"وحدة الحجم",desc:"وحدة قياس الصوت التناظري."},
+      {en:"PPM",ar:"مقياس الذروة",desc:"عداد يعرض الذروات الصوتية بدقة."},
+      {en:"Ballistics",ar:"الديناميكية",desc:"سرعة استجابة العداد للتغيرات الصوتية."},
+      {en:"True RMS",ar:"المتوسط التربيعي الحقيقي",desc:"طريقة دقيقة لقياس متوسط مستوى الصوت."},
+      {en:"Crest Factor",ar:"عامل الذروة",desc:"النسبة بين الذروة والمتوسط في الإشارة."},
+      {en:"Dynamic Range Compression",ar:"ضغط المدى الديناميكي",desc:"تقليل الفرق بين أعلى وأدنى مستوى صوتي."},
+      {en:"Upward Compression",ar:"الضغط التصاعدي",desc:"رفع الأصوات الهادئة بدل خفض الصاخبة."},
+      {en:"Downward Expansion",ar:"التوسيع التنازلي",desc:"خفض الأصوات الهادئة أكثر."},
+      {en:"Parallel Compression",ar:"الضغط المتوازي",desc:"خلط إشارة مضغوطة مع غير مضغوطة."},
+      {en:"Serial Compression",ar:"الضغط المتسلسل",desc:"استخدام أكثر من ضاغط على التوالي."},
+      {en:"Multiband Gate",ar:"بوابة متعددة النطاقات",desc:"بوابة صوتية لكل نطاق ترددي."},
+      {en:"De-click",ar:"إزالة النقرات",desc:"إزالة الأصوات النقرية من التسجيلات."},
+      {en:"De-crackle",ar:"إزالة الطقطقة",desc:"إزالة أصوات الطقطقة (مثل التسجيلات القديمة)."},
+      {en:"De-hum",ar:"إزالة الهمهمة",desc:"إزالة الترددات المنخفضة الثابتة."},
+      {en:"De-buzz",ar:"إزالة الطنين",desc:"إزالة الطنين الناتج عن التداخل الكهربائي."},
+      {en:"Voice Leveler",ar:"معادل الصوت",desc:"أداة لتوحيد مستوى الصوت في الحوار."},
+      {en:"Dialogue Isolation",ar:"عزل الحوار",desc:"فصل الحوار عن الضوضاء الخلفية."},
+      {en:"Music Rebalance",ar:"إعادة توازن الموسيقى",desc:"فصل الآلات في المقطع الموسيقي."},
+      {en:"AI Audio Repair",ar:"إصلاح صوتي بالذكاء الاصطناعي",desc:"استخدام الذكاء الاصطناعي لتنظيف الصوت."},
+      {en:"Neural Network",ar:"الشبكة العصبية",desc:"نموذج ذكاء اصطناعي لمعالجة الصوت أو الصورة."},
+      {en:"Machine Learning",ar:"التعلم الآلي",desc:"تقنية لتعليم الأنظمة التعرف على الأنماط."},
+      {en:"Object Removal",ar:"إزالة الكائن",desc:"حذف كائن من الفيديو باستخدام الذكاء الاصطناعي."},
+      {en:"Content-Aware Fill",ar:"الملء الواعي بالمحتوى",desc:"تعبئة المنطقة المحذوفة بمحتوى مناسب."},
+      {en:"Auto Color",ar:"اللون التلقائي",desc:"تصحيح الألوان تلقائيًا باستخدام الذكاء الاصطناعي."},
+      {en:"Scene Edit Detection",ar:"كشف تحرير المشهد",desc:"الكشف التلقائي عن نقاط القطع في الفيديو."},
+      {en:"Speech Analysis",ar:"تحليل الكلام",desc:"تحليل الحوار لاستخراج الكلمات أو المشاعر."},
+      {en:"Facial Recognition",ar:"التعرف على الوجه",desc:"تحديد الوجوه في الفيديو تلقائيًا."},
+      {en:"Object Tracking",ar:"تتبع الكائن",desc:"تتبع كائن متحرك عبر الإطارات."},
+      {en:"Motion Estimation",ar:"تقدير الحركة",desc:"تحليل حركة البكسلات بين الإطارات."},
+      {en:"Optical Flow Interpolation",ar:"استيفاء التدفق البصري",desc:"إنشاء إطارات وهمية لسلاسة الحركة."},
+      {en:"Frame Rate Conversion",ar:"تحويل معدل الإطارات",desc:"تغيير معدل الإطارات مع الحفاظ على السلاسة."},
+      {en:"Telecine",ar:"التحويل التلفزيوني",desc:"عملية تحويل الفيلم إلى فيديو."},
+      {en:"Pulldown",ar:"السحب",desc:"تقنية لتحويل 24fps إلى 30fps."},
+      {en:"3:2 Pulldown",ar:"سحب 3:2",desc:"طريقة شائعة لتحويل الفيلم إلى NTSC."},
+      {en:"Inverse Telecine",ar:"عكس التحويل التلفزيوني",desc:"استعادة الفيلم الأصلي من الفيديو."},
+      {en:"Deinterlace",ar:"إزالة التضفير",desc:"تحويل الفيديو المضفر إلى متتابع."},
+      {en:"Field Blending",ar:"مزج المجالات",desc:"طريقة لإزالة التضفير عبر مزج المجالات."},
+      {en:"Field Discard",ar:"تجاهل المجال",desc:"إزالة أحد المجالين في الفيديو المضفر."},
+      {en:"Bob",ar:"القفز",desc:"تحويل كل مجال إلى إطار منفصل."},
+      {en:"Weave",ar:"النسج",desc:"دمج المجالين لإنشاء إطار كامل."},
+      {en:"Adaptive Deinterlace",ar:"إزالة تضفير تكيفية",desc:"تختار أفضل طريقة لإزالة التضفير حسب الحركة."},
+      {en:"Chroma Smoothing",ar:"تنعيم اللون",desc:"تقليل التشويش اللوني في الفيديو."},
+      {en:"Noise Reduction Temporal",ar:"خفض الضوضاء الزمني",desc:"يستخدم الإطارات المجاورة لخفض الضوضاء."},
+      {en:"Noise Reduction Spatial",ar:"خفض الضوضاء المكاني",desc:"يستخدم البكسلات المجاورة في نفس الإطار."},
+      {en:"Detail Preservation",ar:"الحفاظ على التفاصيل",desc:"خوارزمية لمنع فقدان التفاصيل أثناء معالجة الصورة."},
+      {en:"Edge Enhancement",ar:"تعزيز الحواف",desc:"زيادة وضوح حواف الكائنات."},
+      {en:"Halation",ar:"الهالة",desc:"تأثير ضوئي حول الأضواء الساطعة (مثل الفيلم)."},
+      {en:"Bloom",ar:"التوهج",desc:"تأثير توهج ناعم حول الأضوات."},
+      {en:"Glare",ar:"الوهج",desc:"وهج قوي يقلل الرؤية."},
+      {en:"Flare",ar:"الانعكاس",desc:"بقع ضوئية ناتجة عن العدسة."},
+      {en:"Anamorphic",ar:"أنامورفيك",desc:"عدسات تشوه الصورة لتصوير نسبة عرض واسعة."},
+      {en:"Desqueeze",ar:"فك الضغط",desc:"استعادة الصورة الطبيعية من لقطة أنامورفيك."},
+      {en:"Center Extraction",ar:"استخراج المركز",desc:"استخراج جزء من وسط الصورة لنسبة عرض أضيق."},
+      {en:"Pan & Scan",ar:"المقلاة والمسح",desc:"طريقة قديمة لعرض الفيلم على شاشة 4:3."},
+      {en:"Open Matte",ar:"مات مفتوح",desc:"لقطة مصورة بمساحة إضافية لعرضها على شاشات مختلفة."},
+      {en:"Safe Action Area",ar:"منطقة الحركة الآمنة",desc:"الجزء الذي يظهر على جميع الشاشات."},
+      {en:"Title Safe Area",ar:"منطقة العناوين الآمنة",desc:"الجزء الآمن لوضع النصوص."},
+      {en:"Graphics Safe",ar:"منطقة الرسوم الآمنة",desc:"مساحة آمنة للعناصر الرسومية."},
+      {en:"Overscan",ar:"المسح الزائد",desc:"الجزء الذي قد لا يظهر على الشاشات القديمة."},
+      {en:"Underscan",ar:"المسح الناقص",desc:"عرض الصورة كاملة مع الحواف."},
+      {en:"Pixel Aspect Ratio Correction",ar:"تصحيح نسبة عرض البكسل",desc:"عرض الصورة بشكل صحيح حسب شكل البكسل."},
+      {en:"Non-Square Pixel",ar:"بكسل غير مربع",desc:"بكسل بعرض وارتفاع مختلفين."},
+      {en:"Square Pixel",ar:"بكسل مربع",desc:"النوع القياسي في الفيديو الحديث."},
+      {en:"Resolution Independence",ar:"الاستقلالية عن الدقة",desc:"القدرة على العمل بدقة مختلفة دون فقدان الجودة."},
+      {en:"Vector Graphics",ar:"الرسوم المتجهة",desc:"رسوم قابلة للتحجيم دون فقدان الجودة."},
+      {en:"Raster Graphics",ar:"الرسوم النقطية",desc:"صور مكونة من بكسلات."},
+      {en:"Anti-aliasing",ar:"مكافحة التعرّج",desc:"تنعيم حواف الخطوط والأشكال."},
+      {en:"Subpixel Rendering",ar:"عرض تحت البكسل",desc:"تقنية لتحسين وضوح النصوص."},
+      {en:"Chroma Keying",ar:"المفتاح اللوني",desc:"إزالة خلفية بلون محدد."},
+      {en:"Luma Keying",ar:"المفتاح اللمعي",desc:"إزالة أجزاء بناءً على السطوع."},
+      {en:"Difference Keying",ar:"مفتاح الفرق",desc:"عزل الكائن بناءً على الفرق بين لقطتين."},
+      {en:"Color Range",ar:"نطاق اللون",desc:"تحديد الألوان المراد إزالتها في المفتاح اللوني."},
+      {en:"Spill Suppression",ar:"قمع الانسكاب",desc:"إزالة لون الخلفية المنعكس على الموضوع."},
+      {en:"Matte Generation",ar:"إنشاء المات",desc:"إنشاء قناع لعزل الكائن."},
+      {en:"Matte Refinement",ar:"تحسين المات",desc:"تحسين حواف القناع."},
+      {en:"Edge Feather",ar:"تدرج الحافة",desc:"تنعيم حواف القناع."},
+      {en:"Edge Choke",ar:"تقليل الحافة",desc:"تقليص حجم القناع."},
+      {en:"Edge Grow",ar:"توسيع الحافة",desc:"توسيع حجم القناع."},
+      {en:"Matte Cleanup",ar:"تنظيف المات",desc:"إزالة التشويش من القناع."},
+      {en:"Holdout Matte",ar:"مات الاحتفاظ",desc:"يحمي جزءًا من الصورة من التأثير."},
+      {en:"Donut Matte",ar:"مات الكعكة",desc:"قناع دائري مع فتحة في المنتصف."},
+      {en:"Alpha Track Matte",ar:"مات مسار ألفا",desc:"استخدام قناة ألفا كقناع."},
+      {en:"Luma Track Matte",ar:"مات مسار لمعة",desc:"استخدام السطوع كقناع."},
+      {en:"Inverted Matte",ar:"مات معكوس",desc:"عكس مناطق الشفافية."},
+      {en:"Matte Overlay",ar:"تراكب المات",desc:"عرض القناع كتراكب مرئي."},
+      {en:"Matte Monitor",ar:"شاشة المات",desc:"عرض القناع فقط."},
+      {en:"Keylight",ar:"كي لايت",desc:"أداة احترافية للمفتاح اللوني."},
+      {en:"Ultra Key",ar:"ألترا كي",desc:"أداة مفتاح لوني في Premiere Pro."},
+      {en:"Primatte Keyer",ar:"برايمات كير",desc:"أداة مفتاح لوني متقدمة."},
+      {en:"Spill Killer",ar:"قاتل الانسكاب",desc:"أداة لإزالة لون الخلفية المنعكس."},
+      {en:"Despill",ar:"إزالة الانسكاب",desc:"تنظيف الألوان من تأثير الخلفية."},
+      {en:"Color Decontamination",ar:"إزالة تلوث اللون",desc:"تنظيف الألوان من تأثير الخلفية."},
+      {en:"Edge Color Correction",ar:"تصحيح لون الحافة",desc:"تحسين لون حواف الكائن بعد المفتاح."},
+      {en:"Matte Softness",ar:"نعومة المات",desc:"درجة نعومة حواف القناع."},
+      {en:"Matte Contrast",ar:"تباين المات",desc:"الفرق بين الشفاف وغير الشفاف في القناع."},
+      {en:"Matte Bias",ar:"انحياز المات",desc:"تحريك نقطة التباين في القناع."},
+      {en:"Screen Gain",ar:"تكبير المفتاح",desc:"زيادة حساسية المفتاح اللوني."},
+      {en:"Screen Balance",ar:"توازن الشاشة",desc:"ضبط الألوان في المفتاح اللوني."},
+      {en:"Replace Method",ar:"طريقة الاستبدال",desc:"كيفية ملء الفراغ الناتج عن إزالة الخلفية."},
+      {en:"Foreground Color Correction",ar:"تصحيح لون المقدمة",desc:"تحسين لون الكائن بعد إزالة الخلفية."},
+      {en:"Background Plate",ar:"الصفيحة الخلفية",desc:"الصورة أو الفيديو المستخدم كخلفية."},
+      {en:"Compositing",ar:"التركيب",desc:"دمج عناصر متعددة في مشهد واحد."},
+      {en:"Layer",ar:"الطبقة",desc:"عنصر في التكوين (فيديو، صوت، تأثير)."},
+      {en:"Blending",ar:"المزج",desc:"دمج الطبقات معًا."},
+      {en:"Blend Mode",ar:"وضع المزج",desc:"كيف تتفاعل الطبقة مع ما تحتها."},
+      {en:"Multiply",ar:"الضرب",desc:"وضع مزج يُظلم الصورة."},
+      {en:"Screen",ar:"الشاشة",desc:"وضع مزج يُضيء الصورة."},
+      {en:"Overlay",ar:"التغطية",desc:"وضع مزج يحافظ على الإضاءة والظلال."},
+      {en:"Soft Light",ar:"الضوء الناعم",desc:"وضع مزج يخلق تأثير إضاءة ناعمة."},
+      {en:"Hard Light",ar:"الضوء القوي",desc:"وضع مزج يخلق تأثير إضاءة قوية."},
+      {en:"Color Dodge",ar:"تخفيف اللون",desc:"يُضيء الطبقة حسب لون الطبقة السفلية."},
+      {en:"Color Burn",ar:"تكثيف اللون",desc:"يُظلم الطبقة حسب لون الطبقة السفلية."},
+      {en:"Difference",ar:"الفرق",desc:"يعرض الفرق بين الطبقتين."},
+      {en:"Exclusion",ar:"الاستبعاد",desc:"مثل الفرق لكن بنعومة أقل."},
+      {en:"Hue",ar:"الصبغة",desc:"وضع مزج يحتفظ بلون الطبقة ويطبّق لونها على السطوع والتشبع للطبقة السفلية."},
+      {en:"Saturation",ar:"التشبع",desc:"وضع مزج يحتفظ بتشبع الطبقة ويطبّق تشبّعها على الصبغة والسطوع للطبقة السفلية."},
+      {en:"Color",ar:"اللون",desc:"وضع مزج يحتفظ بالصبغة والتشبع للطبقة ويطبّقها على سطوع الطبقة السفلية."},
+      {en:"Luminosity",ar:"السطوع",desc:"وضع مزج يحتفظ بسطوع الطبقة ويطبّقه على الصبغة والتشبع للطبقة السفلية."},
+      {en:"Straight Alpha",ar:"ألفا مستقيم",desc:"قناة ألفا دون مزج مع الخلفية."},
+      {en:"Premultiplied Alpha",ar:"ألفا مسبقة الضرب",desc:"قناة ألفا ممزوجة مع لون الخلفية."},
+      {en:"Keying Workflow",ar:"سير عمل المفتاح",desc:"الخطوات لإزالة الخلفية بنجاح."},
+      {en:"Spill Workflow",ar:"سير عمل الانسكاب",desc:"الخطوات لإزالة لون الخلفية المنعكس."},
+      {en:"Matte Workflow",ar:"سير عمل المات",desc:"الخطوات لإنشاء وتحسين القناع."},
+      {en:"Compositing Workflow",ar:"سير عمل التركيب",desc:"الخطوات لدمج العناصر في مشهد واحد."},
+      {en:"3D Compositing",ar:"تركيب ثلاثي الأبعاد",desc:"دمج عناصر 3D مع لقطات حقيقية."},
+      {en:"Camera Projection",ar:"إسقاط الكاميرا",desc:"تحويل صورة ثنائية إلى مشهد ثلاثي الأبعاد."},
+      {en:"Depth Map",ar:"خريطة العمق",desc:"صورة تحدد بُعد كل بكسل عن الكاميرا."},
+      {en:"Z-Depth",ar:"العمق Z",desc:"نفس خريطة العمق."},
+      {en:"Parallax",ar:"الانزياح البصري",desc:"الاختلاف في موضع الكائن عند تغيير زاوية الرؤية."},
+      {en:"Matchmoving",ar:"الحركة المطابقة",desc:"محاكاة حركة الكاميرا الحقيقية في الفضاء الافتراضي."},
+      {en:"Camera Solve",ar:"حل الكاميرا",desc:"حساب مسار الكاميرا من لقطة حقيقية."},
+      {en:"Point Cloud",ar:"سحابة النقاط",desc:"تمثيل ثلاثي الأبعاد للمشهد عبر نقاط."},
+      {en:"Mesh",ar:"الشبكة",desc:"هيكل ثلاثي الأبعاد مكون من مضلعات."},
+      {en:"UV Mapping",ar:"رسم UV",desc:"ربط نسيج ثنائي الأبعاد مع سطح ثلاثي الأبعاد."},
+      {en:"Texture",ar:"النسيج",desc:"صورة تُستخدم لتغطية سطح ثلاثي الأبعاد."},
+      {en:"Normal Map",ar:"خريطة النورمال",desc:"تُضيف تفاصيل ثلاثية الأبعاد دون تعقيد الشبكة."},
+      {en:"Displacement Map",ar:"خريطة الإزاحة",desc:"تشوه الشبكة ثلاثية الأبعاد بناءً على صورة."},
+      {en:"Bump Map",ar:"خريطة النتوء",desc:"تُضيف وهم التفاصيل دون تشويه الشبكة."},
+      {en:"Specular Map",ar:"خريطة اللمعان",desc:"تحدد مناطق اللمعان على السطح."},
+      {en:"Roughness Map",ar:"خريطة الخشونة",desc:"تحدد مدى خشونة السطح."},
+      {en:"Metallic Map",ar:"خريطة المعدنية",desc:"تحدد مناطق المعدن على السطح."},
+      {en:"Ambient Occlusion",ar:"الإخفاء المحيطي",desc:"تأثير ظلال ناعمة في الزوايا."},
+      {en:"Global Illumination",ar:"الإضاءة العالمية",desc:"محاكاة ارتداد الضوء في المشهد."},
+      {en:"Ray Tracing",ar:"تتبع الأشعة",desc:"تقنية واقعية لمحاكاة الضوء."},
+      {en:"Path Tracing",ar:"تتبع المسار",desc:"نوع متقدم من تتبع الأشعة."},
+      {en:"Render Engine",ar:"محرك التصيير",desc:"برنامج لحساب الإضاءة والظلال."},
+      {en:"Real-time Rendering",ar:"التصيير الفوري",desc:"عرض المشهد ثلاثي الأبعاد بشكل مباشر."},
+      {en:"Offline Rendering",ar:"التصيير غير الفوري",desc:"حساب المشهد يستغرق وقتًا."},
+      {en:"Render Farm",ar:"مزرعة التصيير",desc:"مجموعة من الحواسيب لتسريع التصيير."},
+      {en:"Distributed Rendering",ar:"التصيير الموزع",desc:"توزيع مهمة التصيير على عدة أجهزة."},
+      {en:"Render Passes",ar:"مراحل التصيير",desc:"تصيير عناصر المشهد بشكل منفصل."},
+      {en:"Beauty Pass",ar:"مرحلة الجمال",desc:"الطبقة النهائية من المشهد."},
+      {en:"Shadow Pass",ar:"مرحلة الظل",desc:"طبقة الظلال فقط."},
+      {en:"Reflection Pass",ar:"مرحلة الانعكاس",desc:"طبقة الانعكاسات فقط."},
+      {en:"AO Pass",ar:"مرحلة الإخفاء المحيطي",desc:"طبقة الإخفاء المحيطي فقط."},
+      {en:"Z-Depth Pass",ar:"مرحلة العمق",desc:"طبقة العمق فقط."},
+      {en:"Matte Pass",ar:"مرحلة المات",desc:"طبقة القناع فقط."},
+      {en:"Compositing Passes",ar:"مراحل التركيب",desc:"دمج مراحل التصيير في مشهد واحد."},
+      {en:"Nuke",ar:"نيوك",desc:"برنامج احترافي للتركيب."},
+      {en:"After Effects",ar:"أفتر إيفكتس",desc:"برنامج لمؤثرات الفيديو والتركيب."},
+      {en:"Fusion",ar:"فيوجن",desc:"برنامج تركيب مدمج في DaVinci Resolve."},
+      {en:"Flame",ar:"فلييم",desc:"برنامج تركيب احترافي من Autodesk."},
+      {en:"Smoke",ar:"سموك",desc:"برنامج مونتاج وتركيب من Autodesk."},
+      {en:"Baselight",ar:"بيس لايت",desc:"نظام احترافي لتصحيح الألوان."},
+      {en:"Scratch",ar:"سكراتش",desc:"نظام متكامل للمونتاج والتركيب."},
+      {en:"Mocha",ar:"موتشا",desc:"أداة لتتبع الحركة والتركيب."},
+      {en:"Syntheyes",ar:"سينث آيز",desc:"برنامج لحل الكاميرا ثلاثية الأبعاد."},
+      {en:"PFTrack",ar:"بي إف تراك",desc:"برنامج لتتبع الحركة وحل الكاميرا."},
+      {en:"Boujou",ar:"بوجو",desc:"برنامج قديم لتتبع الحركة."},
+      {en:"3DEqualizer",ar:"3D إيكوالايزر",desc:"برنامج احترافي لحل الكاميرا."},
+      {en:"Camera Tracker",ar:"متتبع الكاميرا",desc:"أداة لتتبع حركة الكاميرا في After Effects."},
+      {en:"Planar Tracker",ar:"متتبع مستوي",desc:"يتتبع سطح مستوٍ في الفيديو."},
+      {en:"Point Tracker",ar:"متتبع نقطي",desc:"يتتبع نقطة محددة في الفيديو."},
+      {en:"Stabilize",ar:"تثبيت",desc:"إزالة الاهتزاز من اللقطة."},
+      {en:"Smooth Motion",ar:"الحركة الناعمة",desc:"تقليل الاهتزاز مع الحفاظ على حركة سلسة."},
+      {en:"Warp Stabilizer",ar:"مثبت الالتواء",desc:"أداة متقدمة لتثبيت الفيديو في أدوبي."},
+      {en:"Auto Stabilize",ar:"تثبيت تلقائي",desc:"تثبيت الفيديو تلقائيًا."},
+      {en:"Manual Stabilize",ar:"تثبيت يدوي",desc:"تثبيت الفيديو يدويًا عبر نقاط."},
+      {en:"Stabilization Points",ar:"نقاط التثبيت",desc:"النقاط التي يعتمد عليها التثبيت."},
+      {en:"Stabilization Method",ar:"طريقة التثبيت",desc:"الخوارزمية المستخدمة للتثبيت."},
+      {en:"Smoothness",ar:"النعومة",desc:"درجة تقليل الاهتزاز."},
+      {en:"Method",ar:"الطريقة",desc:"الأسلوب أو الخوارزمية التي تستخدمها الأداة لأداء مهمة معينة."},
+      {en:"Algorithm",ar:"الخوارزمية",desc:"خوارزمية حسابية تُستخدم لتحليل أو معالجة البيانات."},
+      {en:"Interpolation",ar:"الاستيفاء",desc:"حساب القيم بين نقطتين."},
+      {en:"Extrapolation",ar:"الاستكمال",desc:"حساب القيم خارج نطاق البيانات."},
+      {en:"Keyframe Interpolation",ar:"استيفاء الإطار المفتاحي",desc:"كيف تتغير القيمة بين الإطارات المفتاحية."},
+      {en:"Linear Interpolation",ar:"استيفاء خطي",desc:"تغيير ثابت بين الإطارات المفتاحية."},
+      {en:"Bezier Interpolation",ar:"استيفاء بيزييه",desc:"تغيير سلس مع تحكم في المنحنى."},
+      {en:"Ease In",ar:"تهدئة الدخول",desc:"يبدأ التغيير ببطء ثم يسرع."},
+      {en:"Ease Out",ar:"تهدئة الخروج",desc:"يبدأ التغيير بسرعة ثم يبطئ."},
+      {en:"Ease In Out",ar:"تهدئة الدخول والخروج",desc:"يبدأ وينتهي ببطء مع سرعة في المنتصف."},
+      {en:"Graph Editor",ar:"محرر المنحنى",desc:"أداة لضبط استيفاء الإطارات المفتاحية."},
+      {en:"Speed Graph",ar:"منحنى السرعة",desc:"عرض سرعة التغيير مع الوقت."},
+      {en:"Value Graph",ar:"منحنى القيمة",desc:"عرض القيمة مع الوقت."},
+      {en:"Temporal Interpolation",ar:"استيفاء زمني",desc:"استيفاء عبر الوقت."},
+      {en:"Spatial Interpolation",ar:"استيفاء مكاني",desc:"استيفاء عبر الفضاء (للموضع)."},
+      {en:"Roving Keyframe",ar:"إطار مفتاحي متحرك",desc:"إطار مفتاحي يتحرك تلقائيًا لتحسين السلاسة."},
+      {en:"Hold Keyframe",ar:"إطار مفتاحي ثابت",desc:"القيمة تبقى ثابتة حتى الإطار التالي."},
+      {en:"Continuous Bezier",ar:"بيزييه مستمر",desc:"منحنى سلس عبر الإطارات المفتاحية."},
+      {en:"Auto Bezier",ar:"بيزييه تلقائي",desc:"البرنامج يضبط المنحنى تلقائيًا."},
+      {en:"Corner Point",ar:"نقطة زاوية",desc:"نقطة بيزييه باتجاهات منفصلة."},
+      {en:"Smooth Point",ar:"نقطة ناعمة",desc:"نقطة بيزييه باتجاهات متصلة."},
+      {en:"Direction Handle",ar:"مقبض الاتجاه",desc:"يتحكم في انحناء المنحنى."},
+      {en:"Influence",ar:"التأثير",desc:"مدى تأثير المقبض على المنحنى."},
+      {en:"Weight",ar:"الوزن",desc:"نفس التأثير."},
+      {en:"Temporal Anchor",ar:"مرساة زمنية",desc:"نقطة ثابتة في الوقت."},
+      {en:"Spatial Anchor",ar:"مرساة مكانية",desc:"نقطة ثابتة في الفضاء."},
+      {en:"Anchor Point",ar:"نقطة الارتساء",desc:"النقطة التي تدور أو تتغير حولها العناصر."},
+      {en:"Transform",ar:"التحويل",desc:"تغيير الموضع، الحجم، الدوران."},
+      {en:"Skew",ar:"الميل",desc:"ميل العنصر بشكل مائل."},
+      {en:"Perspective",ar:"المنظور",desc:"تغيير منظور العنصر."},
+      {en:"Feather",ar:"التدرج",desc:"تنعيم حواف العنصر."},
+      {en:"Mask Path",ar:"مسار القناع",desc:"شكل القناع."},
+      {en:"Mask Feather",ar:"تدرج القناع",desc:"نعومة حواف القناع."},
+      {en:"Mask Opacity",ar:"عتامة القناع",desc:"شفافية القناع."},
+      {en:"Mask Expansion",ar:"توسيع القناع",desc:"زيادة أو تقليل حجم القناع."},
+      {en:"Roto Brush",ar:"فرشاة الرسم الإطاري",desc:"أداة لعزل الكائنات تلقائيًا."},
+      {en:"Refine Edge",ar:"تحسين الحافة",desc:"تحسين حواف القناع."},
+      {en:"Refine Radius",ar:"نصف قطر التحسين",desc:"منطقة تحسين الحافة."},
+      {en:"Choke",ar:"الخنق",desc:"تقليص القناع."},
+      {en:"Soften",ar:"التنعيم",desc:"تنعيم القناع."},
+      {en:"Contrast",ar:"التباين",desc:"زيادة الفرق بين الشفاف وغير الشفاف."},
+      {en:"Shift Edge",ar:"إزاحة الحافة",desc:"تحريك نقطة التباين في القناع."},
+      {en:"Decontaminate Colors",ar:"إزالة تلوث الألوان",desc:"تنظيف الألوان من تأثير الخلفية."},
+      {en:"Output",ar:"الإخراج",desc:"النتيجة النهائية من الأداة أو النظام."},
+      {en:"Input",ar:"الإدخال",desc:"البيانات أو الملفات التي تُدخل إلى الأداة أو النظام."},
+      {en:"Source",ar:"المصدر",desc:"الملف الأصلي."},
+      {en:"Destination",ar:"الوجهة",desc:"المكان الذي يُحفظ فيه الملف."},
+      {en:"Path",ar:"المسار",desc:"المكان الذي يوجد فيه الملف داخل جهاز الكمبيوتر."},
+      {en:"Extension",ar:"الامتداد",desc:"جزء من اسم الملف يُحدد نوعه (مثل .mp4 أو .mov)."},
+      {en:"Wrapper",ar:"الغلاف",desc:"نفس الحاوية."},
+      {en:"Data Rate",ar:"معدل البيانات",desc:"نفس معدل البت."},
+      {en:"Variable Bitrate",ar:"معدل بت متغير",desc:"يغير معدل البت حسب تعقيد المشهد."},
+      {en:"Constant Bitrate",ar:"معدل بت ثابت",desc:"يستخدم نفس معدل البت طوال الفيديو."},
+      {en:"Quality",ar:"الجودة",desc:"درجة وضوح الفيديو أو الصوت."},
+      {en:"Compression",ar:"الضغط",desc:"تقليل حجم الملف."},
+      {en:"Lossy Compression",ar:"ضغط مع فقدان",desc:"يقلل الجودة لتقليل الحجم."},
+      {en:"Lossless Compression",ar:"ضغط بدون فقدان",desc:"يقلل الحجم دون فقدان الجودة."},
+      {en:"Artifact",ar:"التشويه",desc:"تشويه بصري ناتج عن ضغط الفيديو أو الصوت."},
+      {en:"Blocking",ar:"التكتل",desc:"تشويه على شكل مربعات."},
+    ];
+    // عناصر DOM
+    const html = document.getElementById('html');
+    const searchInput = document.getElementById('search');
+    const searchBtn = document.getElementById('search-btn');
+    const resultsDiv = document.getElementById('results');
+    const quizContainer = document.getElementById('quiz-container');
+    const settingsModal = document.getElementById('settings-modal');
+    const aboutModal = document.getElementById('about-modal');
+    const externalQuizModal = document.getElementById('external-quiz-modal');
+    const darkModeToggle = document.getElementById('dark-mode');
+    const timerModeToggle = document.getElementById('timer-mode');
+    const showRareToggle = document.getElementById('show-rare');
+    const navItems = document.querySelectorAll('.nav-item');
+    const menuToggle = document.getElementById('menu-toggle');
+    const sidebar = document.getElementById('sidebar');
+    const banner = document.getElementById('external-quiz-banner');
+
+
+    // تحميل الإعدادات من localStorage
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    const savedTimer = localStorage.getItem('timer-enabled') !== 'false';
+    const savedShowRare = localStorage.getItem('show-rare-enabled') !== 'false';
+    if (savedTheme === 'dark') {
+      html.classList.add('dark');
+      darkModeToggle.checked = true;
+    }
+    timerModeToggle.checked = savedTimer;
+    showRareToggle.checked = savedShowRare;
+
+
+    // تبديل الوضع الليلي
+    darkModeToggle.addEventListener('change', () => {
+      if (darkModeToggle.checked) {
+        html.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        html.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      }
+    });
+
+
+    // تبديل مؤقت الاختبار
+    timerModeToggle.addEventListener('change', () => {
+      localStorage.setItem('timer-enabled', timerModeToggle.checked);
+    });
+
+
+    // تبديل عرض المصطلحات النادرة
+    showRareToggle.addEventListener('change', () => {
+      localStorage.setItem('show-rare-enabled', showRareToggle.checked);
+    });
+
+
+    // زر القائمة على الجوال: تهيئة أولية
+    if (window.innerWidth <= 768) {
+      sidebar.classList.add('mobile-hidden');
+    }
+
+
+    menuToggle.addEventListener('click', (e) => {
+      e.stopPropagation(); // منع إغلاق الشريط عند النقر على الزر نفسه
+      sidebar.classList.toggle('mobile-hidden');
+    });
+
+
+    // وظائف التنقل
+    function showSection(section) {
+      navItems.forEach(item => item.classList.remove('active'));
+      const targetItem = document.querySelector(`.nav-item[data-section="${section}"]`);
+      if (targetItem) targetItem.classList.add('active');
+
+
+      if (section === 'dictionary') {
+        resultsDiv.style.display = 'block';
+        quizContainer.style.display = 'none';
+        banner.style.display = 'block';
+      } else if (section === 'quiz') {
+        resultsDiv.style.display = 'none';
+        quizContainer.style.display = 'block';
+        banner.style.display = 'none';
+        generateQuiz();
+      } else if (section === 'settings') {
+        banner.style.display = 'none';
+        settingsModal.classList.add('show');
+      } else if (section === 'about') {
+        banner.style.display = 'none';
+        aboutModal.classList.add('show');
+      } else if (section === 'external-quiz') {
+        banner.style.display = 'none';
+        externalQuizModal.classList.add('show');
+      }
+    }
+
+
+    navItems.forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        const section = item.getAttribute('data-section');
+        showSection(section);
+        // إغلاق القائمة على الجوال بعد الاختيار
+        if (window.innerWidth <= 768) {
+          sidebar.classList.add('mobile-hidden');
+        }
+      });
+    });
+
+
+    // إغلاق النوافذ
+    function closeModal(modal) {
+      modal.classList.remove('show');
+    }
+    settingsModal.querySelector('.close').onclick = () => closeModal(settingsModal);
+    aboutModal.querySelector('.close').onclick = () => closeModal(aboutModal);
+    externalQuizModal.querySelector('.close').onclick = () => closeModal(externalQuizModal);
+    document.getElementById('cancel-external-quiz').onclick = () => closeModal(externalQuizModal);
+
+
+    // ✅ إغلاق الشريط الجانبي عند النقر خارجه (الحل النهائي)
+    document.addEventListener('click', (e) => {
+      if (window.innerWidth <= 768) {
+        const isClickInsideSidebar = sidebar.contains(e.target);
+        const isClickOnMenuToggle = menuToggle.contains(e.target);
+        if (!isClickInsideSidebar && !isClickOnMenuToggle && !sidebar.classList.contains('mobile-hidden')) {
+          sidebar.classList.add('mobile-hidden');
+        }
+      }
+    });
+
+
+    // إنهاء الاختبار عند النقر على مربع البحث
+    searchInput.addEventListener('focus', () => {
+      if (quizContainer.style.display === 'block') {
+        showSection('dictionary');
+      }
+    });
+
+
+    // البحث
+    const renderResults = (terms) => {
+      if (terms.length === 0) {
+        resultsDiv.innerHTML = '<div style="text-align:center;color:var(--text-light);padding:30px;font-size:18px;">لا توجد نتائج. جرّب مصطلحًا آخر.</div>';
+      } else {
+        resultsDiv.innerHTML = terms.map(t => 
+          `<div class="term">
+            <div class="en">${t.en}</div>
+            <div class="ar">${t.ar}</div>
+            <div class="desc">${t.desc}</div>
+          </div>`
+        ).join('');
+      }
+      banner.style.display = 'block';
+    };
+
+
+    const performSearch = () => {
+      const q = searchInput.value.trim().toLowerCase();
+      if (!q) {
+        resultsDiv.innerHTML = '<div style="text-align:center;color:var(--text-light);padding:30px;font-size:18px;">اكتب مصطلحًا للبحث...</div>';
+        banner.style.display = 'block';
+        return;
+      }
+      const filtered = dict.filter(t => 
+        t.en.toLowerCase().includes(q) || 
+        t.ar.includes(q)
+      );
+      renderResults(filtered);
+    };
+
+
+    searchInput.addEventListener('input', performSearch);
+    searchBtn.addEventListener('click', performSearch);
+    searchInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') performSearch();
+    });
+
+
+    // اختبار تفاعلي
+    function generateQuiz() {
+      const shuffled = [...dict].sort(() => 0.5 - Math.random());
+      const questionTerm = shuffled[0];
+      const options = [questionTerm, ...shuffled.slice(1, 4)];
+      const shuffledOptions = [...options].sort(() => 0.5 - Math.random());
+      const timerEnabled = localStorage.getItem('timer-enabled') !== 'false';
+      const timerHTML = timerEnabled ? '<div class="quiz-timer" id="quiz-timer">30</div>' : '';
+      
+      // ✅ رسالة دعائية محدثة بناءً على محتوى الموقع الخارجي الفعلي
+      const promoMessage = `
+        <div style="margin-top:25px; padding:15px; background:var(--quiz-bg); border-radius:10px; text-align:center; font-size:15px; color:var(--text-light); line-height:1.6;">
+          💡 <strong>هل أعجبك هذا السؤال؟</strong><br>
+          جرّب <a href="https://68d71e990ddc280008721a6b--capable-starship-a9e926.netlify.app/" target="_blank" style="color:var(--success); font-weight:600; text-decoration:underline;">اختبار مصطلحات المونتاج</a> المتقدم!<br>
+          يحتوي على تصنيفات ذكية: <strong>الصوت، الألوان، الكاميرا، الذكاء الاصطناعي، المؤثرات، الانتقالات</strong> وغيرها.<br>
+          ✅ عرض متوافق مع الهاتف • ✅ إحصائيات أداء فورية • ✅ خاصية البحث والتصدير
+        </div>
+      `;
+
+
+      quizContainer.innerHTML = `
+        <div class="quiz-header">
+          <div class="quiz-progress">السؤال 1 من 1</div>
+          ${timerHTML}
+        </div>
+        <div class="quiz-question">
+          ما الترجمة العربية لمصطلح: <strong style="color:var(--primary);">${questionTerm.en}</strong>؟
+        </div>
+        <div class="options" id="quiz-options">
+          ${shuffledOptions.map(opt => 
+            `<div class="option" data-correct="${opt.ar === questionTerm.ar}">${opt.ar}</div>`
+          ).join('')}
+        </div>
+        ${promoMessage}
+        <div class="quiz-controls">
+          <button id="next-quiz" class="btn">سؤال آخر</button>
+          <button id="exit-quiz" class="btn">إنهاء الاختبار</button>
+        </div>
+      `;
+
+
+      if (timerEnabled) {
+        let timeLeft = 30;
+        const timerElement = document.getElementById('quiz-timer');
+        const timerInterval = setInterval(() => {
+          timerElement.textContent = timeLeft;
+          if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            document.querySelectorAll('.option').forEach(o => o.style.pointerEvents = 'none');
+            document.querySelector('.option[data-correct="true"]').classList.add('correct');
+          }
+          timeLeft--;
+        }, 1000);
+      }
+      document.querySelectorAll('.option').forEach(opt => {
+        opt.addEventListener('click', function() {
+          document.querySelectorAll('.option').forEach(o => o.style.pointerEvents = 'none');
+          if (this.dataset.correct === 'true') {
+            this.classList.add('correct');
+          } else {
+            this.classList.add('incorrect');
+            document.querySelector('.option[data-correct="true"]').classList.add('correct');
+          }
+        });
+      });
+      document.getElementById('next-quiz').onclick = () => showSection('quiz');
+      document.getElementById('exit-quiz').onclick = () => showSection('dictionary');
+    }
+
+
+    // بدء بعرض القاموس
+    showSection('dictionary');
+
+
+    // تهيئة أيقونات Lucide
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.lucide) lucide.createIcons();
+    });
+
+
+    // تحديث حالة الشريط الجانبي عند تغيير حجم النافذة
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768) {
+        sidebar.classList.remove('mobile-hidden');
+      }
+    });
+  </script>
+</body>
+</html>
